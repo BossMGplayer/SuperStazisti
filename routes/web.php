@@ -19,4 +19,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/jo/create', [App\Http\Controllers\JobOfferPostController::class, 'create']); //->name('jobOfferPost.create');
 Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.show');

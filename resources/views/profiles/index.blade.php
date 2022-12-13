@@ -10,11 +10,11 @@
 
         <div class="pt-3">
             <div>
-                <strong>Name: </strong>{{$user->profile->first_name}} {{$user->profile->last_name}}
+                <strong>Name: </strong> {{ $user->profile->full_name ?? 'N/A'}}
             </div>
 
             <div>
-                <strong>Address: </strong> Random, Street 1
+                <strong>Address: </strong> {{ $user->profile->address ?? 'N/A'}}
             </div>
 
             <div class="pt-3">
@@ -33,11 +33,11 @@
                 <strong>Contact: </strong>
 
                 <div class="ps-2">
-                    <strong>Email: </strong> john.doe@gmail.com
+                    <strong>Email: </strong> {{ $user->profile->email ?? 'N/A'}}
                 </div>
 
                 <div class="ps-2">
-                    <strong>Phone: </strong> 0940 123 456
+                    <strong>Phone: </strong> {{ $user->profile->phone_number ?? 'N/A'}}
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <div class="col-4 rounded ms-3 mb-3" style="border: #000000 solid">
+        <div class="col-4 rounded ms-3 mb-5" style="border: #000000 solid">
             <div>
                 Kuchar
             </div>
@@ -90,4 +90,6 @@
         </div>
     </div>
 </div>
+@include('layouts.footer')
 @endsection
+
