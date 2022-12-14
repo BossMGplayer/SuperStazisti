@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="container">
+    <form action="/jo/create" method="post">
+        @csrf
     <div class="col-8 offset-2">
         <div class="row mb-3">
             <label for="first_name" class="col-md-4 col-form-label text-md-end">{{ __('First name') }}</label>
@@ -78,13 +80,13 @@
 
             <div class="col-md-6">
                 <select id="employment_type" type="text" class="form-control @error('employment_type') is-invalid @enderror" name="employment_type" value="{{ old('employment_type') }}" required autocomplete="employment_type">
-                    <option value="full time"></option>
-                    <option value="part time"></option>
-                    <option value="contract"></option>
-                    <option value="temporary"></option>
-                    <option value="volunteer"></option>
-                    <option value="internship"></option>
-                    <option value="other"></option>
+                    <option value="full_time">Full time</option>
+                    <option value="part_time">Part time</option>
+                    <option value="contract">Contract</option>
+                    <option value="temporary">Temporary</option>
+                    <option value="volunteer">Volunteer</option>
+                    <option value="internship">Intership</option>
+                    <option value="other">Other</option></select>
 
                 @error('employment_type')
                 <span class="invalid-feedback" role="alert">
@@ -99,9 +101,10 @@
 
             <div class="col-md-6">
                 <select id="workplace" type="text" class="form-control @error('workplace') is-invalid @enderror" name="workplace" value="{{ old('workplace') }}" required autocomplete="workplace">
-                    <option value="On-site"></option>
-                    <option value="Hybrid"></option>
-                    <option value="Remote"></option>
+                    <option value="On-site">On-site</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Remote">Remote</option>
+                </select>
 
                 @error('workplace')
                 <span class="invalid-feedback" role="alert">
@@ -112,20 +115,26 @@
         </div>
 
         <div class="row mb-3">
-            <label for="first_name" class="col-md-4 col-form-label text-md-end">{{ __('First name') }}</label>
+            <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
 
             <div class="col-md-6">
-                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name">
+                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description">
 
-                @error('first_name')
+                @error('description')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
             </div>
+
+            <div class="row pt-4">
+                <button class="btn btn-primary">Post job offer</button>
+            </div>
         </div>
     </div>
+    </form>
 </div>
+
 @include('layouts.footer')
 @endsection
 
