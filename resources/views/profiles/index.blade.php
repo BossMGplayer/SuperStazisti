@@ -45,22 +45,24 @@
 
     <div class="row">
     @foreach($user->jobOffers as $jobOffer)
-        <div class="card mt-3 me-3" style="width: 288px; height: 200px; border: 2px solid #e0e0e0 ">
-            <div class="card-body rounded ms-3">
-                <div>
-                    {{ $jobOffer->job_title }}
+            <a href="/jo/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
+                <div class="card mt-3 me-3" style="width: 288px; height: 200px; border: 2px solid #e0e0e0 ">
+                    <div class="card-body rounded ms-3">
+                        <div>
+                            {{ $jobOffer->job_title }}
+                        </div>
+                        <div>
+                            {{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type)) }}
+                        </div>
+                        <div>
+                            {{ $jobOffer->address }}
+                        </div>
+                        <div>
+                            {{ $jobOffer->pay }}eur/h
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    {{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type)) }}
-                </div>
-                <div>
-                    {{ $jobOffer->address }}
-                </div>
-                <div>
-                    {{ $jobOffer->pay }}eur/h
-                </div>
-            </div>
-        </div>
+            </a>
     @endforeach
     </div>
 

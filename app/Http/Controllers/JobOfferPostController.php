@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models;
 
 class JobOfferPostController extends Controller
 {
@@ -35,5 +36,10 @@ class JobOfferPostController extends Controller
         auth()->user()->jobOffers()->create($data);
 
         return redirect('/profile/' . auth()->user()->id);
+    }
+
+    public function show(Models\JobOfferPost $jobOfferPost)
+    {
+        return view('jobOfferPosts.show', compact('jobOfferPost'));
     }
 }

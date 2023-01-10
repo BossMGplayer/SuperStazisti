@@ -19,7 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/jo/{jobOfferPost}', [App\Http\Controllers\JobOfferPostController::class, 'show']);
 Route::get('/jo/create', [App\Http\Controllers\JobOfferPostController::class, 'create']);
 Route::post('/jo', [App\Http\Controllers\JobOfferPostController::class, 'store']);
 
 Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.show');
+
+
