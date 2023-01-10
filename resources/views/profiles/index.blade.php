@@ -43,53 +43,27 @@
         </div>
     </div>
 
-    <div class="row pt-5">
-        <div class="col-4 rounded ms-3 mb-3" style="border: #000000 solid">
-            <div>
-                Upratovač
-            </div>
-            <div>
-                Full-time
-            </div>
-            <div>
-                Random, Street 1
-            </div>
-            <div>
-                5eur/h
-            </div>
-        </div>
-
-        <div class="col-4 rounded ms-3 mb-3" style="border: #000000 solid">
-            <div>
-                Programátor
-            </div>
-            <div>
-                Full-time
-            </div>
-            <div>
-                Random, Street 1
-            </div>
-            <div>
-                8eur/h
+    <div class="row">
+    @foreach($user->jobOffers as $jobOffer)
+        <div class="card mt-3 me-3" style="width: 288px; height: 200px; border: 2px solid #e0e0e0 ">
+            <div class="card-body rounded ms-3">
+                <div>
+                    {{ $jobOffer->job_title }}
+                </div>
+                <div>
+                    {{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type)) }}
+                </div>
+                <div>
+                    {{ $jobOffer->address }}
+                </div>
+                <div>
+                    {{ $jobOffer->pay }}eur/h
+                </div>
             </div>
         </div>
-
-        <div class="col-4 rounded ms-3 mb-5" style="border: #000000 solid">
-            <div>
-                Kuchar
-            </div>
-            <div>
-                Full-time
-            </div>
-            <div>
-                Random, Street 1
-            </div>
-            <div>
-                6eur/h
-            </div>
-        </div>
+    @endforeach
     </div>
-</div>
+
 @include('layouts.footer')
 @endsection
 

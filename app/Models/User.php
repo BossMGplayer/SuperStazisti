@@ -48,6 +48,6 @@ class User extends Authenticatable
 
     public function jobOffers()
     {
-        return $this->hasMany(JobOfferPost::class);
+        return $this->hasMany(JobOfferPost::class)->orderBy('created_at','DESC');
     }
 }
