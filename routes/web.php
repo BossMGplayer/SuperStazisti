@@ -24,6 +24,8 @@ Route::get('/jo/create', [App\Http\Controllers\JobOfferPostController::class, 'c
 Route::get('/jo/{jobOfferPost}', [App\Http\Controllers\JobOfferPostController::class, 'show']);
 Route::post('/jo', [App\Http\Controllers\JobOfferPostController::class, 'store']);
 
+Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
 Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.show');
+Route::patch('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
 

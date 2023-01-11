@@ -2,47 +2,40 @@
 
 @section('content')
     <div class="container">
-        <div class="col-12 card">
-            <div>
-                <div class="col-sm-12 col-md-12 col-lg-3 d-flex justify-content-center">
+        <div class="card">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-3 text-center">
                     <img src="https://img.freepik.com/free-photo/portrait-shirtless-young-man-isolated-grey-studio-background-caucasian-healthy-male-model-looking-side-posing-concept-men-s-health-beauty-self-care-body-skin-care_155003-33864.jpg?w=2000"
-                         style="height: 300px; width: 300px" class="rounded-circle">
+                         class="img-fluid rounded-circle" style="height: 250px; width: 250px">
                 </div>
+                <div class="col-sm-12 col-md-12 col-lg-9">
+                    <div class="pt-3">
+                        <h1>{{  $jobOfferPost->job_title }}</h1>
+                    </div>
+                    <div>
+                        {{  $jobOfferPost->company_name ?? "No company"}}
+                    </div>
 
-                <div class="ps-3">
-                <div>
-                    <h1>{{  $jobOfferPost->job_title }}</h1>
-                </div>
+                    <div>
+                        <strong>Workplace type:</strong> {{ ucfirst($jobOfferPost->workplace) }}
+                    </div>
 
-                <div>
-                    {{  $jobOfferPost->company_name ?? "No company"}}
-                </div>
+                    <div>
+                        <strong>Job type:</strong> {{ $jobOfferPost->employment_type }}
+                    </div>
+                    <div>
+                        <strong>Address:</strong> {{ $jobOfferPost->address }}
+                    </div>
+                    <div>
+                        <strong>Pay:</strong> {{ $jobOfferPost->pay }}eur/h
+                    </div>
 
-                <div>
-                    Workplace type:
-                    {{  ucfirst($jobOfferPost->workplace) }}
+                    <div>
+                        <strong>Description:</strong> {{ $jobOfferPost->description }}
+                    </div>
                 </div>
-
-                <div>
-                    Job type:
-                    {{  $jobOfferPost->employment_type }}
-                </div>
-
-                <div>
-                    Address:
-                    {{  $jobOfferPost->address }}
-                </div>
-                <div>
-                    Pay:
-                    {{  $jobOfferPost->pay }}eur/h
-                </div>
-
-                <div>
-                    Description:
-                    {{  $jobOfferPost->description }}
-                </div>
-            </div>
             </div>
         </div>
     </div>
+    @include('layouts.footer')
 @endsection
