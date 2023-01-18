@@ -47,22 +47,40 @@
         </div>
 
         <div class="row mt-4">
-            <h3 class="mb-3">Job Offers</h3>
-            <div class="card-deck">
-                @foreach($user->jobOffers as $jobOffer)
-                    <a href="/jo/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
+            <div class="col-6">
+                <h3 class="mb-3">Job Offers</h3>
+                <div class="card-deck">
+                    @foreach($user->jobOffers as $jobOffer)
+                        <a href="/jo/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $jobOffer->job_title }}</h5>
+                                    <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type)) }}</p>
+                                    <p class="card-text">{{ $jobOffer->address }}</p>
+                                    <p class="card-text">{{ $jobOffer->pay }}eur/h</p>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+            <div class="col-6">
+                <h3 class="mb-3">Job Requests</h3>
+                <div class="card-deck">
+                    @foreach($user->jobRequests as $jobRequest)
+                    <a href="/jr/{{ $jobRequest->id }}" class="text-decoration-none link-dark">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $jobOffer->job_title }}</h5>
-                                <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type)) }}</p>
-                                <p class="card-text">{{ $jobOffer->address }}</p>
-                                <p class="card-text">{{ $jobOffer->pay }}eur/h</p>
+                                <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
+                                <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobRequest->employment_type)) }}</p>
+                                <p class="card-text">{{ $jobRequest->address }}</p>
+                                <p class="card-text">{{ $jobRequest->pay }}eur/h</p>
                             </div>
                         </div>
                     </a>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
         </div>
-    </div>
     @include('layouts.footer')
 @endsection

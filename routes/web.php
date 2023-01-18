@@ -20,13 +20,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
 Route::get('/jo/create', [App\Http\Controllers\JobOfferPostController::class, 'create']);
-Route::get('/jo/{jobOfferPost}', [App\Http\Controllers\JobOfferPostController::class, 'show']);
+Route::get('/jo/{jobOfferPost}', [App\Http\Controllers\JobOfferPostController::class, 'show'])->name('jo.show');
 Route::post('/jo', [App\Http\Controllers\JobOfferPostController::class, 'store'])->name('jo.store');
 
 Route::get('/jr/create', [App\Http\Controllers\JobRequestPostController::class, 'create']);
-Route::get('/jr/{jobRequestPost}', [App\Http\Controllers\JobRequestPostController::class, 'show']);
+Route::get('/jr/{jobRequestPost}', [App\Http\Controllers\JobRequestPostController::class, 'show'])->name('jr.show');
 Route::post('/jr', [App\Http\Controllers\JobRequestPostController::class, 'store'])->name('jr.store');
 
 Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');

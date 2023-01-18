@@ -5,6 +5,12 @@
         <form action="{{route('jr.store')}}" method="post" enctype="multipart/form-data">
             @csrf
 
+            <div class="button-container" style="text-align: center;">
+                <a href="/jo/create" class="btn btn-secondary mr-2" style="margin-right: 8px;">Job Offer</a>
+                <a href="/jr/create" class="btn btn-primary" style="margin-left: 8px;">Job Request</a>
+            </div>
+            <hr style="width: 100%; height: 1px; background-color: #ccc; margin: 16px 0;">
+
             <div class="col-8 offset-2">
                 <div class="row mb-3">
                     <label for="first_name" class="col-md-4 col-form-label text-md-end">First name</label>

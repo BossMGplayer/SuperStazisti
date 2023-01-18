@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models;
 
-class JobOfferPostController extends Controller
+class JobRequestPostController extends Controller
 {
     public function __construct()
     {
@@ -15,10 +15,8 @@ class JobOfferPostController extends Controller
 
     public function create()
     {
-        $user = auth()->user();
-        return view('jobOfferPosts.create', compact('user'));
+        return view('jobRequestPosts.create');
     }
-
 
     public function store()
     {
@@ -34,14 +32,14 @@ class JobOfferPostController extends Controller
             'description' => 'required|string',
         ]);
 
-        auth()->user()->jobOffers()->create($data);
+        auth()->user()->jobRequests()->create($data);
 
         return redirect()->route('profile.show', Auth::user()->id);
     }
 
     public function show($id)
     {
-        $jobOfferPost = Models\JobOfferPost::findOrFail($id);
-        return view('jobOfferPosts.show', compact('jobOfferPost'));
+        $jobRequestPost = Models\JobRequestPost::findOrFail($id);
+        return view('jobRequestPosts.show', compact('jobRequestPost'));
     }
 }
