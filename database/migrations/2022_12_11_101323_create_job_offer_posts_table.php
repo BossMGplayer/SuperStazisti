@@ -25,10 +25,10 @@ class CreateJobOfferPostsTable extends Migration
             $table->string('address');
             $table->integer('pay');
             $table->text('description');
+            $table->string('type')->default('post');
             $table->timestamps();
 
             $table->index('user_id');
-
         });
     }
 

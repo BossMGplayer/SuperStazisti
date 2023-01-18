@@ -18,6 +18,7 @@ class JobOfferPost extends Model
         'employment_type',
         'address',
         'pay',
+        'type',
         'description'
     ];
 
