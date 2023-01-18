@@ -20,7 +20,8 @@ class Profile extends Model
         'pay',
         'description',
         'email',
-        'phone_number'
+        'phone_number',
+        'image'
     ];
 
     public function user()

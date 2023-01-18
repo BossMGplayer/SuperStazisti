@@ -36,7 +36,7 @@ class JobOfferPostController extends Controller
 
         auth()->user()->jobOffers()->create($data);
 
-        return redirect('/profile/' . auth()->user()->id);
+        return redirect()->route('profile.show', Auth::user()->id);
     }
 
     public function show(Models\JobOfferPost $jobOfferPost)

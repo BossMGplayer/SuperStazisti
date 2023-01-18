@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ Auth::routes();
 
 Route::get('/jo/create', [App\Http\Controllers\JobOfferPostController::class, 'create']);
 Route::get('/jo/{jobOfferPost}', [App\Http\Controllers\JobOfferPostController::class, 'show']);
-Route::post('/jo', [App\Http\Controllers\JobOfferPostController::class, 'store']);
+Route::post('/jo', [App\Http\Controllers\JobOfferPostController::class, 'store'])->name('jo.store');
 
 Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
 Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.show');
