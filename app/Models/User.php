@@ -51,7 +51,7 @@ class User extends Authenticatable
                 'last_name' => 'N/A',
                 'company_name' => 'N/A',
                 'address' => 'N/A',
-                'email' => 'N/A',
+                'email' => $user->email,
                 'phone_number' => 'N/A',
             ]);
         });
@@ -70,5 +70,10 @@ class User extends Authenticatable
     public function jobRequests()
     {
         return $this->hasMany(JobRequestPost::class)->orderBy('created_at', 'DESC');
+    }
+
+    public function languages()
+    {
+        return $this->hasMany(Language::class)->orderBy('created_at', 'DESC');
     }
 }

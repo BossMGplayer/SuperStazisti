@@ -15,7 +15,8 @@ class JobRequestPostController extends Controller
 
     public function create()
     {
-        return view('jobRequestPosts.create');
+        $user = auth()->user();
+        return view('jobRequestPosts.create', compact('user'));
     }
 
     public function store()
@@ -30,6 +31,8 @@ class JobRequestPostController extends Controller
             'address' => 'required|string',
             'pay' => 'required|integer|min:0',
             'description' => 'required|string',
+            'email' => 'required|email',
+            'phone_number' => 'required|string'
         ]);
 
         auth()->user()->jobRequests()->create($data);

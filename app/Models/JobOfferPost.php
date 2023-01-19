@@ -18,7 +18,9 @@ class JobOfferPost extends Model
         'employment_type',
         'address',
         'pay',
-        'description'
+        'description',
+        'email',
+        'phone_number',
     ];
 
     public function user()

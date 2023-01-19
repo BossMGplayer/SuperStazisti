@@ -31,7 +31,12 @@
                                 <p><strong>Phone: </strong> {{ $user->profile->phone_number ?? 'N/A'}}</p>
                             </div>
                         </div>
-                        <h4 class="card-title mt-4">Languages</h4>
+
+                        <div class="d-flex justify-content-between">
+                            <h4 class="card-title mt-4">Languages</h4>
+                            <button type="button" class="btn btn-primary btn-xs" id="languageModalBtn">Add language</button>
+                        </div>
+
                         <hr>
                         <div class="row">
                             <div class="col-md-6">
@@ -72,7 +77,7 @@
                         <div class="card mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
-                                <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobRequest->employment_type)) }}</p>
+                                <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobRequest->employment_type ))}}</p>
                                 <p class="card-text">{{ $jobRequest->address }}</p>
                                 <p class="card-text">{{ $jobRequest->pay }}eur/h</p>
                             </div>
@@ -82,5 +87,57 @@
                 </div>
             </div>
         </div>
+
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Modal Header</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the Modal Body</p>
+                    <p>Some other text...</p>
+                </div>
+                <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            // Get the modal
+            const modal = document.getElementById("myModal");
+
+            // Get the button that opens the modal
+            let btn = document.getElementById("languageModalBtn");
+
+            // Get the <span> element that closes the modal
+            const span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks the button, open the modal
+            btn.onclick = function() {
+                modal.style.display = "block";
+                console.log("button clicked")
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+
+
+
     @include('layouts.footer')
 @endsection

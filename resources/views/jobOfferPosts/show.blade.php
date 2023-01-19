@@ -21,7 +21,7 @@
                     </div>
 
                     <div>
-                        <strong>Job type:</strong> {{ $jobOfferPost->employment_type }}
+                        <strong>Job type:</strong> {{ ucfirst(str_replace('_', ' ', $jobOfferPost->employment_type ))}}
                     </div>
                     <div>
                         <strong>Address:</strong> {{ $jobOfferPost->address }}
@@ -35,6 +35,20 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="card mt-3 pb-3">
+            <div class="col-sm-12 col-md-12 col-lg-9 ps-3">
+                <div class="pt-3">
+                    <h1>Contact:</h1>
+                </div>
+                <div>
+                    <strong>Phone number:</strong> {{  $jobOfferPost->phone_number }}
+                </div>
+
+                <div>
+                    <strong>Email:</strong> {{ $jobOfferPost->email }}
+                </div>
         </div>
     </div>
     @include('layouts.footer')

@@ -26,6 +26,8 @@ class CreateJobRequestPostsTable extends Migration
             $table->integer('pay');
             $table->text('description');
             $table->string('type')->default('request');
+            $table->string('email');
+            $table->string('phone_number');
             $table->timestamps();
 
             $table->index('user_id');

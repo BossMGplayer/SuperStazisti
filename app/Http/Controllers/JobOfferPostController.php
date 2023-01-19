@@ -32,6 +32,8 @@ class JobOfferPostController extends Controller
             'address' => 'required|string',
             'pay' => 'required|integer|min:0',
             'description' => 'required|string',
+            'email' => 'required|email',
+            'phone_number' => 'required|string'
         ]);
 
         auth()->user()->jobOffers()->create($data);
