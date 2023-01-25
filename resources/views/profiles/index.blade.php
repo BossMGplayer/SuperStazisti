@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <link rel="stylesheet" href="resources/css/app.css">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 d-flex justify-content-center align-items-center">
@@ -88,39 +89,26 @@
             </div>
         </div>
 
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
+        <div id="languageModal" class="modal">
             <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Modal Header</h2>
-                </div>
-                <div class="modal-body">
-                    <p>Some text in the Modal Body</p>
-                    <p>Some other text...</p>
-                </div>
-                <div class="modal-footer">
-                    <h3>Modal Footer</h3>
-                </div>
+                <span class="close">&times;</span>
+                <div>Hello</div>
             </div>
-
         </div>
 
         <script>
             // Get the modal
-            const modal = document.getElementById("myModal");
+            var modal = document.getElementById("languageModal");
 
             // Get the button that opens the modal
-            let btn = document.getElementById("languageModalBtn");
+            var btn = document.getElementById("languageModalBtn");
 
             // Get the <span> element that closes the modal
-            const span = document.getElementsByClassName("close")[0];
+            var span = document.getElementsByClassName("close")[0];
 
             // When the user clicks the button, open the modal
             btn.onclick = function() {
                 modal.style.display = "block";
-                console.log("button clicked")
             }
 
             // When the user clicks on <span> (x), close the modal
@@ -135,9 +123,18 @@
                 }
             }
         </script>
-
-
-
-
+        <style>
+            #languageModal {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: transparent;
+                padding: 20px;
+                display: none;
+                width: 150px;
+                height: 150px;
+            }
+        </style>
     @include('layouts.footer')
 @endsection
