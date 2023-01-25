@@ -17,7 +17,7 @@ class CreateLanguagesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('language');
-            $table->enum('skill',['beginner','intermediate','expert']);
+            $table->enum('skill',['beginner','intermediate','expert','fluent','native','proficient']);
             $table->timestamps();
 
             $table->index('user_id');

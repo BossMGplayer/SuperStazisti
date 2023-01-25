@@ -11,7 +11,8 @@ class ProfileController extends Controller
 {
     public function index(User $user)
     {
-        return view('profiles.index', compact('user'));
+        $languages = $user->languages()->get();
+        return view('profiles.index', compact('user', 'languages'));
     }
 
     public function edit(User $user)

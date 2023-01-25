@@ -13,18 +13,11 @@ class LanguageController extends Controller
         $this->middleware('auth');
     }
 
-    public function create()
-    {
-        $user = auth()->user();
-        return view('jobOfferPosts.create', compact('user'));
-    }
-
-
     public function store()
     {
         $data = request()->validate([
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'language' => 'required|string',
+            'skill' => 'required|string|in:beginner,intermediate,expert,fluent,native,proficient',
         ]);
 
         auth()->user()->languages()->create($data);

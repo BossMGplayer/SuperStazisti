@@ -32,4 +32,4 @@ Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfileController::clas
 Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.show');
 Route::patch('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
-
+Route::post('/lang', [App\Http\Controllers\LanguageController::class, 'store'])->name('lang.store');

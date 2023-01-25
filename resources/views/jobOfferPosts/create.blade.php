@@ -93,7 +93,8 @@
                             <option value="temporary">Temporary</option>
                             <option value="volunteer">Volunteer</option>
                             <option value="internship">Intership</option>
-                            <option value="other">Other</option></select>
+                            <option value="other">Other</option>
+                        </select>
 
                         @error('employment_type')
                         <span class="invalid-feedback" role="alert">
