@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="resources/css/app.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 d-flex justify-content-center align-items-center">
@@ -35,9 +36,11 @@
 
                         <div class="d-flex justify-content-between">
                             <h4 class="card-title mt-4">Languages</h4>
+                            @can('update', $user->profile)
                             <button type="button" class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Add language
                             </button>
+                            @endcan
                         </div>
 
                             <!-- Modal -->
@@ -112,7 +115,7 @@
                                             </span>
                                             @enderror
 
-                                            <select id="skill" type="text" class="form-control @error('skill') is-invalid @enderror" name="skill" value="{{ old('skill') }}" required autocomplete="skill">>
+                                            <select id="skill" type="text" class="form-control mt-2 @error('skill') is-invalid @enderror" name="skill" value="{{ old('skill') }}" required autocomplete="skill">>
                                                 <option value="beginner">Beginner</option>
                                                 <option value="intermediate">Intermediate</option>
                                                 <option value="expert">Expert</option>
@@ -133,15 +136,19 @@
                         <div class="row">
                             @if($user->languages->count() > 0)
                                 @foreach($user->languages as $language)
-                                    <div class="col-md-6 d-flex">
-                                        <strong>{{ ucfirst($language->language) }}</strong>&nbsp;<p>{{ ucfirst($language->skill) }}</p>
+                                    <form action="{{ route('lang.delete', $language->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="d-flex text-decoration-none text-dark">
+                                            <strong>{{ ucfirst($language->language) }}</strong>&nbsp;<p>{{ ucfirst($language->skill) }}</p>
+                                        </button>
+                                    </form>
 
                                     </div>
                                 @endforeach
                             @else
                                 <p>No languages.</p>
                             @endif
-
                         </div>
                     </div>
                 </div>
@@ -182,6 +189,7 @@
                     </a>
                     @endforeach
                 </div>
+                <div id="toastr-container"></div>
             </div>
         </div>
     </div>

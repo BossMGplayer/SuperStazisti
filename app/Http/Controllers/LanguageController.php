@@ -20,7 +20,17 @@ class LanguageController extends Controller
             'skill' => 'required|string|in:beginner,intermediate,expert,fluent,native,proficient',
         ]);
 
-        auth()->user()->languages()->create($data);
+        try {
+            auth()->user()->languages()->create($data);
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                echo '<script>
+                    $(document).ready(function() {
+                        toastr.error("Language is already present!");
+                    });
+                </script>';
+            }
+        }
 
         return redirect()->route('profile.show', Auth::user()->id);
     }
@@ -28,5 +38,6 @@ class LanguageController extends Controller
     public function delete($id)
     {
         Language::destroy($id);
+        return redirect()->route('profile.show', Auth::user()->id);
     }
 }

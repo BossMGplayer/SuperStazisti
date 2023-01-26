@@ -33,3 +33,4 @@ Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'i
 Route::patch('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
 Route::post('/lang', [App\Http\Controllers\LanguageController::class, 'store'])->name('lang.store');
+Route::delete('/lang/{id}', [App\Http\Controllers\LanguageController::class, 'delete'])->name('lang.delete');
