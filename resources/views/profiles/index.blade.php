@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-
+    <link rel="stylesheet" href="resources/css/app.css">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 d-flex justify-content-center align-items-center">
@@ -12,9 +11,9 @@
 
             <div class="col-sm-12 col-md-12 col-lg-9">
                 @can('update', $user->profile)
-                <div class="justify-content-end d-flex">
-                    <a href="/profile/{{ $user->id }}/edit">Edit profile</a>
-                </div>
+                    <div class="justify-content-end d-flex">
+                        <a href="/profile/{{ $user->id }}/edit">Edit profile</a>
+                    </div>
                 @endcan
                 <div class="card">
                     <div class="card-body">
@@ -36,24 +35,22 @@
 
                         <div class="d-flex justify-content-between">
                             <h4 class="card-title mt-4">Languages</h4>
-                            @can('update', $user->profile)
                             <button type="button" class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Add language
                             </button>
-                            @endcan
                         </div>
 
-                            <!-- Modal -->
-                            <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add new Language</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="{{route('lang.store')}}" method="post" enctype="multipart/form-data">
-                                                @csrf
+                        <!-- Modal -->
+                        <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add new Language</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{route('lang.store')}}" method="post" enctype="multipart/form-data">
+                                            @csrf
                                             <select id="language" type="text" class="form-control @error('language') is-invalid @enderror" name="language" value="{{ old('language') }}" required autocomplete="language">
                                                 <option value="albanian">Albanian</option>
                                                 <option value="arabic">Arabic</option>
@@ -115,7 +112,7 @@
                                             </span>
                                             @enderror
 
-                                            <select id="skill" type="text" class="form-control mt-2 @error('skill') is-invalid @enderror" name="skill" value="{{ old('skill') }}" required autocomplete="skill">>
+                                            <select id="skill" type="text" class="form-control @error('skill') is-invalid @enderror" name="skill" value="{{ old('skill') }}" required autocomplete="skill">>
                                                 <option value="beginner">Beginner</option>
                                                 <option value="intermediate">Intermediate</option>
                                                 <option value="expert">Expert</option>
@@ -123,33 +120,30 @@
                                                 <option value="native">Native</option>
                                                 <option value="proficient">Proficient</option>
                                             </select>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Add language</button>
-                                        </div>
-                                            </form>
-                                    </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Add language</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         <hr>
                         <div class="row">
                             @if($user->languages->count() > 0)
                                 @foreach($user->languages as $language)
-                                    <form action="{{ route('lang.delete', $language->id) }}" method="post">
+                                    <form action="{{ route('lang.delete', $language->id) }}" method="post" class="pt-1">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="d-flex text-decoration-none text-dark">
                                             <strong>{{ ucfirst($language->language) }}</strong>&nbsp;<p>{{ ucfirst($language->skill) }}</p>
                                         </button>
                                     </form>
-
-                                    </div>
                                 @endforeach
-                            @else
-                                <p>No languages.</p>
-                            @endif
-                        </div>
+                        @else
+                            <p>No languages.</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -177,19 +171,18 @@
                 <h3 class="mb-3">Job Requests</h3>
                 <div class="card-deck">
                     @foreach($user->jobRequests as $jobRequest)
-                    <a href="/jr/{{ $jobRequest->id }}" class="text-decoration-none link-dark">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
-                                <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobRequest->employment_type ))}}</p>
-                                <p class="card-text">{{ $jobRequest->address }}</p>
-                                <p class="card-text">{{ $jobRequest->pay }}eur/h</p>
+                        <a href="/jr/{{ $jobRequest->id }}" class="text-decoration-none link-dark">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
+                                    <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobRequest->employment_type ))}}</p>
+                                    <p class="card-text">{{ $jobRequest->address }}</p>
+                                    <p class="card-text">{{ $jobRequest->pay }}eur/h</p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
                     @endforeach
                 </div>
-                <div id="toastr-container"></div>
             </div>
         </div>
     </div>

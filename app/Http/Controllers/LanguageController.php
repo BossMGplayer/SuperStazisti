@@ -22,13 +22,10 @@ class LanguageController extends Controller
 
         try {
             auth()->user()->languages()->create($data);
+            toastr()->success('New language added successfully');
         } catch (\Illuminate\Database\QueryException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                echo '<script>
-                    $(document).ready(function() {
-                        toastr.error("Language is already present!");
-                    });
-                </script>';
+            if ($e->errorInfo[1] == 19) {
+                toastr()->error('Language already exists');
             }
         }
 

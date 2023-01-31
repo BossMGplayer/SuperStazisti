@@ -14,7 +14,7 @@ class CreateLanguagesTable extends Migration
     public function up()
     {
         Schema::create('languages', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('language')->unique();
             $table->enum('skill',['beginner','intermediate','expert','fluent','native','proficient']);
