@@ -136,7 +136,7 @@
                                     <form action="{{ route('lang.delete', $language->id) }}" method="post" class="pt-1">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="d-flex text-decoration-none text-dark">
+                                        <button type="submit" class="d-flex text-decoration-none text-dark" style="all: unset; cursor: pointer">
                                             <strong>{{ ucfirst($language->language) }}</strong>&nbsp;<p>{{ ucfirst($language->skill) }}</p>
                                         </button>
                                     </form>
