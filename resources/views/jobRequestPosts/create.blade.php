@@ -122,26 +122,6 @@
                 </div>
 
                 <div class="row mb-3">
-                    <form action="{{route('jrt.store')}}" method="post" enctype="multipart/form-data">
-                    <label for="tag" class="col-md-4 col-form-label text-md-end">Tags</label>
-
-                    <div class="col-md-6">
-                        <select id="tag" type="text" class="form-control @error('tag') is-invalid @enderror" name="tag" value="{{ old('tag') }}" required autocomplete="tag">
-                            <option value="php">php</option>
-                            <option value="js">JavaScript</option>
-                            <option value="java">Java</option>
-                        </select>
-
-                        @error('tag')
-                        <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                        @enderror
-                    </div>
-                    </form>
-                </div>
-
-                <div class="row mb-3">
                     <label for="address" class="col-md-4 col-form-label text-md-end">Address</label>
 
                     <div class="col-md-6">
@@ -179,6 +159,27 @@
                         <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="tags" class="col-md-4 col-form-label text-md-end">Tags</label>
+                    <div class="col-md-6">
+                        <select id="tags" name="tags[]" class="form-control @error('tags') is-invalid @enderror" multiple>
+                            @foreach($tags as $tag)
+                                <option value="{{$tag->id}}"
+                                        @if(old('tags') && in_array($tag->id, old('tags')))
+                                        selected
+                                    @endif>
+                                    {{$tag->name}}</option>
+                            @endforeach
+                        </select>
+
+                        @error('tags')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                 </div>

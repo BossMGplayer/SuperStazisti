@@ -30,6 +30,6 @@ class JobRequestPost extends Model
 
     public function tags()
     {
-        return $this->hasMany(JobRequestTag::class);
+        return $this->morphMany(Tag::class, 'taggable');
     }
 }
