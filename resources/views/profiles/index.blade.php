@@ -35,11 +35,9 @@
 
                         <div class="d-flex justify-content-between">
                             <h4 class="card-title mt-4">Languages</h4>
-                            @can('update', $user->profile)
                             <button type="button" class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Add language
                             </button>
-                            @endcan
                         </div>
 
                         <!-- Modal -->

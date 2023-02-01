@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models;
@@ -36,7 +37,15 @@ class JobOfferPostController extends Controller
             'phone_number' => 'required|string'
         ]);
 
-        auth()->user()->jobOffers()->create($data);
+        $jobOfferPost = auth()->user()->jobOffers()->create($data);
+
+        $tagIds = [];
+        foreach (request()->tags as $tagName) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $tagIds[] = $tag->id;
+        }
+
+        $jobOfferPost->tags()->attach($tagIds);
 
         return redirect()->route('profile.show', Auth::user()->id);
     }

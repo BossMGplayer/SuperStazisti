@@ -35,4 +35,3 @@ Route::patch('/profile/{user}', [App\Http\Controllers\ProfileController::class, 
 Route::post('/lang', [App\Http\Controllers\LanguageController::class, 'store'])->name('lang.store');
 Route::delete('/lang/{id}', [App\Http\Controllers\LanguageController::class, 'delete'])->name('lang.delete');
 
-Route::post('/jrt', [App\Http\Controllers\JobRequestTagController::class, 'store'])->name('jrt.store');
