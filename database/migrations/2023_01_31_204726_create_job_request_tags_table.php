@@ -14,7 +14,9 @@ class CreateJobRequestTagsTable extends Migration
     public function up()
     {
         Schema::create('job_request_tags', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('job_request_post_id');
+            $table->string('tag')->unique();
             $table->timestamps();
         });
     }

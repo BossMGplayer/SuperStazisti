@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+import Vue from 'vue'
+
 
 window.Vue = require('vue').default;
 
@@ -27,6 +29,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
+new Vue({
     el: '#app',
-});
+    components: {
+    }
+})

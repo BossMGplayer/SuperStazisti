@@ -27,4 +27,9 @@ class JobRequestPost extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function tags()
+    {
+        return $this->hasMany(JobRequestTag::class);
+    }
 }

@@ -35,9 +35,11 @@
 
                         <div class="d-flex justify-content-between">
                             <h4 class="card-title mt-4">Languages</h4>
+                            @can('update', $user->profile)
                             <button type="button" class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Add language
                             </button>
+                            @endcan
                         </div>
 
                         <!-- Modal -->
@@ -136,7 +138,7 @@
                                     <form action="{{ route('lang.delete', $language->id) }}" method="post" class="pt-1">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="d-flex text-decoration-none text-dark">
+                                        <button type="submit" class="d-flex text-decoration-none text-dark" style="all: unset; cursor: pointer">
                                             <strong>{{ ucfirst($language->language) }}</strong>&nbsp;<p>{{ ucfirst($language->skill) }}</p>
                                         </button>
                                     </form>
