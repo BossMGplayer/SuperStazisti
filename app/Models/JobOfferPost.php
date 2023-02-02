@@ -21,6 +21,7 @@ class JobOfferPost extends Model
         'description',
         'email',
         'phone_number',
+        'tags'
     ];
 
     public function user()

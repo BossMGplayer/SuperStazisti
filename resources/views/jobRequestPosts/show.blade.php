@@ -12,6 +12,20 @@
                     <div class="pt-3">
                         <h1>{{  $jobRequestPost->job_title }}</h1>
                     </div>
+
+                    <div>
+                        @if(sizeof($tagsArray) > 0)
+                            <div class="d-flex">
+                                @foreach ($tagsArray as $tag)
+                                    <p>{{ $tag }}&nbsp</p>
+                                @endforeach
+
+                                @else
+                                    <p></p>
+                                @endif
+                            </div>
+                    </div>
+
                     <div>
                         <strong>Company:</strong> {{  $jobRequestPost->company_name ?? "No company"}}
                     </div>
@@ -21,7 +35,7 @@
                     </div>
 
                     <div>
-                        <strong>Job type:</strong> {{ $jobRequestPost->employment_type }}
+                        <strong>Job type:</strong> {{ ucfirst(str_replace('_', ' ', $jobRequestPost->employment_type ))}}
                     </div>
                     <div>
                         <strong>Address:</strong> {{ $jobRequestPost->address }}
@@ -33,20 +47,6 @@
                     <div>
                         <strong>Description:</strong> {{ $jobRequestPost->description }}
                     </div>
-
-                    <div>
-                        @if(sizeof($tagsArray) > 0)
-                        <ul>
-                            @foreach ($tagsArray as $tag)
-                                <li>{{ $tag }}</li>
-                            @endforeach
-
-                                @else
-                                    <p>No tags.</p>
-                                @endif
-                        </ul>
-                    </div>
-
                 </div>
             </div>
 

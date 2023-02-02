@@ -12,6 +12,20 @@
                     <div class="pt-3">
                         <h1>{{  $jobOfferPost->job_title }}</h1>
                     </div>
+
+                    <div>
+                        @if(sizeof($tagsArray) > 0)
+                            <div class="d-flex">
+                                @foreach ($tagsArray as $tag)
+                                    <p>{{ $tag }}&nbsp</p>
+                                @endforeach
+
+                                @else
+                                    <p></p>
+                                @endif
+                            </div>
+                    </div>
+
                     <div>
                         <strong>Company:</strong> {{  $jobOfferPost->company_name ?? "No company"}}
                     </div>
@@ -35,8 +49,8 @@
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
         <div class="card mt-3 pb-3">
             <div class="col-sm-12 col-md-12 col-lg-9 ps-3">
                 <div class="pt-3">
@@ -49,7 +63,7 @@
                 <div>
                     <strong>Email:</strong> {{ $jobOfferPost->email }}
                 </div>
+            </div>
         </div>
-    </div>
     @include('layouts.footer')
 @endsection

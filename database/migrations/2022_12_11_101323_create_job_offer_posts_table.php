@@ -28,6 +28,7 @@ class CreateJobOfferPostsTable extends Migration
             $table->string('type')->default('offer');
             $table->string('email');
             $table->string('phone_number');
+            $table->text('tags')->nullable();
             $table->timestamps();
 
             $table->index('user_id');

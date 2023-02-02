@@ -79,9 +79,7 @@ class JobRequestPostController extends Controller
         if ($jobRequestPost->tags) {
             $tagsArray = explode(',', $jobRequestPost->tags);
         }
-//        dd($tagsArray);
 
-//        dd($jobRequestPost);
         return view('jobRequestPosts.show', compact('jobRequestPost', 'tagsArray'));
     }
 

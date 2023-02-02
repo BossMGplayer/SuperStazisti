@@ -34,10 +34,13 @@ class JobOfferPostController extends Controller
             'pay' => 'required|integer|min:0',
             'description' => 'required|string',
             'email' => 'required|email',
-            'phone_number' => 'required|string'
+            'phone_number' => 'required|string',
+            'tags'
         ]);
 
-        $jobOfferPost = auth()->user()->jobOffers()->create($data);
+        $jobOfferPost = auth()->user()->jobOffers()->create(array_merge($data, [
+            'tags' => implode(',', request()->input('tags', []))
+        ]));
 
         return redirect()->route('profile.show', Auth::user()->id);
     }
@@ -45,6 +48,11 @@ class JobOfferPostController extends Controller
     public function show($id)
     {
         $jobOfferPost = Models\JobOfferPost::findOrFail($id);
-        return view('jobOfferPosts.show', compact('jobOfferPost'));
+        $tagsArray = [];
+        if ($jobOfferPost->tags) {
+            $tagsArray = explode(',', $jobOfferPost->tags);
+        }
+
+        return view('jobOfferPosts.show', compact('jobOfferPost', 'tagsArray'));
     }
 }
