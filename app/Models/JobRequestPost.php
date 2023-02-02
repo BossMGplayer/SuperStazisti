@@ -21,6 +21,7 @@ class JobRequestPost extends Model
         'description',
         'email',
         'phone_number',
+        'tags'
     ];
 
     public function user()
@@ -28,8 +29,22 @@ class JobRequestPost extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tags()
+    /**
+     * Set the categories
+     *
+     */
+    public function setCatAttribute($value)
     {
-        return $this->morphMany(Tag::class, 'taggable');
+        $this->attributes['tags'] = json_encode($value);
     }
+
+    /**
+     * Get the categories
+     *
+     */
+    public function getCatAttribute($value)
+    {
+        return $this->attributes['tags'] = json_decode($value);
+    }
+
 }

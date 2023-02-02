@@ -164,17 +164,32 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="tags" class="col-md-4 col-form-label text-md-end">Tags</label>
+                    <label class="col-md-4 col-form-label text-md-end">Tags</label>
                     <div class="col-md-6">
-                        <select id="tags" name="tags[]" class="form-control @error('tags') is-invalid @enderror" multiple>
-                            @foreach($tags as $tag)
-                                <option value="{{$tag->id}}"
-                                        @if(old('tags') && in_array($tag->id, old('tags')))
-                                        selected
-                                    @endif>
-                                    {{$tag->name}}</option>
-                            @endforeach
-                        </select>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="php" name="tag[]" value="php">
+                            <label class="form-check-label" for="php">PHP</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="react" name="tag[]" value="react">
+                            <label class="form-check-label" for="react">React</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="jquery" name="tag[]" value="jquery">
+                            <label class="form-check-label" for="jquery">JQuery</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="javascript" name="tag[]" value="javascript">
+                            <label class="form-check-label" for="javascript">Javascript</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="angular" name="tag[]" value="angular">
+                            <label class="form-check-label" for="angular">Angular</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="vue" name="tag[]" value="vue">
+                            <label class="form-check-label" for="vue">Vue</label>
+                        </div>
 
                         @error('tags')
                         <span class="invalid-feedback" role="alert">

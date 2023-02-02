@@ -33,6 +33,20 @@
                     <div>
                         <strong>Description:</strong> {{ $jobRequestPost->description }}
                     </div>
+
+                    <div>
+                        @if(sizeof($tagsArray) > 0)
+                        <ul>
+                            @foreach ($tagsArray as $tag)
+                                <li>{{ $tag }}</li>
+                            @endforeach
+
+                                @else
+                                    <p>No tags.</p>
+                                @endif
+                        </ul>
+                    </div>
+
                 </div>
             </div>
 

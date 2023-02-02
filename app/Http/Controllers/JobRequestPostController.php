@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models;
 use App\Models\JobRequestPost;
-use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,8 +17,7 @@ class JobRequestPostController extends Controller
     public function create()
     {
         $user = auth()->user();
-        $tags = Tag::all();
-        return view('jobRequestPosts.create', compact('user', 'tags'));
+        return view('jobRequestPosts.create', compact('user'));
     }
 
     public function store()
@@ -36,18 +34,12 @@ class JobRequestPostController extends Controller
             'description' => 'required|string',
             'email' => 'required|email',
             'phone_number' => 'required|string',
-            'tags' => 'required|array'
+            'tags'
         ]);
 
-        $jobRequestPost = auth()->user()->jobRequests()->create($data);
-
-        $tagIds = [];
-        foreach (request()->tags as $tagName) {
-            $tag = Tag::firstOrCreate(['name' => $tagName]);
-            $tagIds[] = $tag->id;
-        }
-
-        $jobRequestPost->tags()->attach($tagIds);
+        $jobRequestPost = auth()->user()->jobRequests()->create(array_merge($data, [
+            'tags' => implode(',', request()->input('tags', []))
+        ]));
 
         return redirect()->route('profile.show', Auth::user()->id);
     }
@@ -72,18 +64,10 @@ class JobRequestPostController extends Controller
             'description' => 'required|string',
             'email' => 'required|email',
             'phone_number' => 'required|string',
-            'tags' => 'required|array',
+            'tags'
         ]);
 
         $jobRequestPost->update($data);
-
-        $tagIds = [];
-        foreach ($request->tags as $tagName) {
-            $tag = Tag::firstOrCreate(['name' => $tagName]);
-            $tagIds[] = $tag->id;
-        }
-
-        $jobRequestPost->tags()->sync($tagIds);
 
         return redirect()->route('profile.show', Auth::user()->id);
     }
@@ -91,6 +75,14 @@ class JobRequestPostController extends Controller
     public function show($id)
     {
         $jobRequestPost = Models\JobRequestPost::findOrFail($id);
-        return view('jobRequestPosts.show', compact('jobRequestPost'));
+        $tagsArray = [];
+        if ($jobRequestPost->tags) {
+            $tagsArray = explode(',', $jobRequestPost->tags);
+        }
+//        dd($tagsArray);
+
+//        dd($jobRequestPost);
+        return view('jobRequestPosts.show', compact('jobRequestPost', 'tagsArray'));
     }
+
 }

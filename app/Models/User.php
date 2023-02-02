@@ -77,8 +77,4 @@ class User extends Authenticatable
         return $this->hasMany(Language::class)->orderBy('created_at', 'DESC');
     }
 
-    public function tags()
-    {
-        return $this->morphMany(Tag::class, 'taggable');
-    }
 }

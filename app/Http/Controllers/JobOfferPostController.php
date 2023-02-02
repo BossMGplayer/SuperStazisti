@@ -39,14 +39,6 @@ class JobOfferPostController extends Controller
 
         $jobOfferPost = auth()->user()->jobOffers()->create($data);
 
-        $tagIds = [];
-        foreach (request()->tags as $tagName) {
-            $tag = Tag::firstOrCreate(['name' => $tagName]);
-            $tagIds[] = $tag->id;
-        }
-
-        $jobOfferPost->tags()->attach($tagIds);
-
         return redirect()->route('profile.show', Auth::user()->id);
     }
 

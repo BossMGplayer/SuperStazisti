@@ -28,11 +28,10 @@ class CreateJobRequestPostsTable extends Migration
             $table->string('type')->default('request');
             $table->string('email');
             $table->string('phone_number');
-            $table->unsignedBigInteger('tag_id')->nullable();
+            $table->text('tags')->nullable();
             $table->timestamps();
 
             $table->index('user_id');
-            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('set null');
         });
     }
 
