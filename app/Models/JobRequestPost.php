@@ -47,4 +47,13 @@ class JobRequestPost extends Model
         return $this->attributes['tags'] = json_decode($value);
     }
 
+    public function scopeWithTags($query, $tags)
+    {
+        return $query->where(function ($query) use ($tags) {
+            foreach ($tags as $tag) {
+                $query->where('tags', 'like', '%'.$tag.'%');
+            }
+        });
+    }
+
 }

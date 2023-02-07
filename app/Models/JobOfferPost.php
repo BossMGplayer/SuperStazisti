@@ -28,4 +28,13 @@ class JobOfferPost extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeWithTags($query, $tags)
+    {
+        return $query->where(function ($query) use ($tags) {
+            foreach ($tags as $tag) {
+                $query->where('tags', 'like', '%'.$tag.'%');
+            }
+        });
+    }
 }

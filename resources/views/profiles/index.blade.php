@@ -33,12 +33,14 @@
                             </div>
                         </div>
 
+                        @can('update', $user->profile)
                         <div class="d-flex justify-content-between">
                             <h4 class="card-title mt-4">Languages</h4>
                             <button type="button" class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Add language
                             </button>
                         </div>
+                        @endcan
 
                         <!-- Modal -->
                         <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -47,6 +49,7 @@
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Add new Language</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
                                     </div>
                                     <div class="modal-body">
                                         <form action="{{route('lang.store')}}" method="post" enctype="multipart/form-data">
@@ -158,6 +161,7 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $jobOffer->job_title }}</h5>
+                                    <hr>
                                     <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type)) }}</p>
                                     <p class="card-text">{{ $jobOffer->address }}</p>
                                     <p class="card-text">{{ $jobOffer->pay }}eur/h</p>
@@ -175,6 +179,7 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
+                                    <hr>
                                     <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobRequest->employment_type ))}}</p>
                                     <p class="card-text">{{ $jobRequest->address }}</p>
                                     <p class="card-text">{{ $jobRequest->pay }}eur/h</p>

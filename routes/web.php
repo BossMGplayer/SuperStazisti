@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home', function () {
+    return view('home');
 });
 
 Auth::routes();
+
+Route::post('/home/filtered', [\App\Http\Controllers\FilterController::class, 'getFiltered'])->name('filterPosts');
 
 Route::get('/jo/create', [App\Http\Controllers\JobOfferPostController::class, 'create']);
 Route::get('/jo/{jobOfferPost}', [App\Http\Controllers\JobOfferPostController::class, 'show'])->name('jo.show');

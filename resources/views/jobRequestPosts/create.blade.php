@@ -167,27 +167,27 @@
                     <label class="col-md-4 col-form-label text-md-end">Tags</label>
                     <div class="col-md-6">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="php" name="tag[]" value="php">
+                            <input class="form-check-input" type="checkbox" id="php" name="tags[]" value="php">
                             <label class="form-check-label" for="php">PHP</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="react" name="tag[]" value="react">
+                            <input class="form-check-input" type="checkbox" id="react" name="tags[]" value="react">
                             <label class="form-check-label" for="react">React</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="jquery" name="tag[]" value="jquery">
+                            <input class="form-check-input" type="checkbox" id="jquery" name="tags[]" value="jquery">
                             <label class="form-check-label" for="jquery">JQuery</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="javascript" name="tag[]" value="javascript">
+                            <input class="form-check-input" type="checkbox" id="javascript" name="tags[]" value="javascript">
                             <label class="form-check-label" for="javascript">Javascript</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="angular" name="tag[]" value="angular">
+                            <input class="form-check-input" type="checkbox" id="angular" name="tags[]" value="angular">
                             <label class="form-check-label" for="angular">Angular</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="vue" name="tag[]" value="vue">
+                            <input class="form-check-input" type="checkbox" id="vue" name="tags[]" value="vue">
                             <label class="form-check-label" for="vue">Vue</label>
                         </div>
 

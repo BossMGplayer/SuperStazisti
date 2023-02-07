@@ -35,7 +35,7 @@ class JobOfferPostController extends Controller
             'description' => 'required|string',
             'email' => 'required|email',
             'phone_number' => 'required|string',
-            'tags'
+            'tags' => 'nullable'
         ]);
 
         $jobOfferPost = auth()->user()->jobOffers()->create(array_merge($data, [
@@ -48,11 +48,28 @@ class JobOfferPostController extends Controller
     public function show($id)
     {
         $jobOfferPost = Models\JobOfferPost::findOrFail($id);
+
         $tagsArray = [];
-        if ($jobOfferPost->tags) {
+        if ($jobOfferPost->tags && $jobOfferPost->tags !== '') {
             $tagsArray = explode(',', $jobOfferPost->tags);
         }
 
         return view('jobOfferPosts.show', compact('jobOfferPost', 'tagsArray'));
     }
+
+    public function getFiltered(Request $request)
+    {
+        $selectedTags = $request->input('selected_tags');
+        $selectedTags = explode(',', $selectedTags);
+        $filteredJOPosts = Models\JobOfferPost::where(function ($query) use ($selectedTags) {
+            foreach ($selectedTags as $tag) {
+                $query->orWhere('tags', 'LIKE', '%' . $tag . '%');
+            }
+        })->get();
+
+        return view('homeFiltered', compact($filteredJOPosts));
+    }
+
+
+
 }
