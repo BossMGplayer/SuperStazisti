@@ -10,7 +10,7 @@
                 </div>
                 <hr class="mt-0 mb-3">
                 <div class="p-2">
-                    <form action="{{ route('filterPosts', ['selectedTags' => []]) }}" method="post">
+                    <form action="{{ route('filterByTags', ['selectedTags' => []]) }}" method="post">
                         @csrf
                         <ul class="col-md-6">
                             <div class="form-check form-check-inline">
@@ -39,7 +39,7 @@
                             </div>
                         </ul>
                         <input type="hidden" name="selected_tags">
-                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <button type="submit" class="btn btn-primary ms-3">Filter</button>
                     </form>
                 </div>
             </div>

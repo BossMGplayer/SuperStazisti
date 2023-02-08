@@ -5,8 +5,10 @@
         <div class="card">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-3 text-center">
-                    <img src="{{ $jobOfferPost->user->profile->profileImage() }}"
+                    <a href="/profile/{{ $jobOfferPost->user->id }}" class="text-decoration-none link-dark">
+                        <img src="{{ $jobOfferPost->user->profile->profileImage() }}"
                          class="img-fluid rounded-circle mb-4" style="width: 250px; height: 250px">
+                    </a>
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-9">
                     <div class="pt-3">

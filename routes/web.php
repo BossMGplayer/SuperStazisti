@@ -20,7 +20,7 @@ Route::get('/home', function () {
 
 Auth::routes();
 
-Route::post('/home/filtered', [\App\Http\Controllers\FilterController::class, 'getFiltered'])->name('filterPosts');
+Route::post('/home/filtered', [\App\Http\Controllers\FilterController::class, 'FilterByTags'])->name('filterByTags');
 
 Route::get('/jo/create', [App\Http\Controllers\JobOfferPostController::class, 'create']);
 Route::get('/jo/{jobOfferPost}', [App\Http\Controllers\JobOfferPostController::class, 'show'])->name('jo.show');

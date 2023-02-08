@@ -9,7 +9,7 @@ use App\Models;
 
 class FilterController extends Controller
 {
-    public function getFiltered(Request $request)
+    public function FilterByTags(Request $request)
     {
         $selectedTags = $request->input('tags');
 
@@ -25,7 +25,6 @@ class FilterController extends Controller
             }
         })->get();
 
-        //dd($jobOfferPosts, $jobRequestPosts);
         return view('homeFiltered', compact('jobOfferPosts', 'jobRequestPosts'));
     }
 
