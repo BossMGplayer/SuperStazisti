@@ -21,7 +21,8 @@ class JobRequestPost extends Model
         'description',
         'email',
         'phone_number',
-        'tags'
+        'tags',
+        'region'
     ];
 
     public function user()

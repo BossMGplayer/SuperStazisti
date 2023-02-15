@@ -40,7 +40,7 @@
                         <strong>Job type:</strong> {{ ucfirst(str_replace('_', ' ', $jobRequestPost->employment_type ))}}
                     </div>
                     <div>
-                        <strong>Address:</strong> {{ $jobRequestPost->address }}
+                        <strong>Address:</strong> {{ ucfirst($jobRequestPost->region) }}, {{ $jobRequestPost->address }}
                     </div>
                     <div>
                         <strong>Pay:</strong> {{ $jobRequestPost->pay }}eur/h
@@ -57,6 +57,9 @@
             <div class="col-sm-12 col-md-12 col-lg-9 ps-3">
                 <div class="pt-3">
                     <h1>Contact:</h1>
+                </div>
+                <div>
+                    <strong>Name:</strong> {{ $jobRequestPost->user->profile->full_name }}
                 </div>
                 <div>
                     <strong>Phone number:</strong> {{  $jobRequestPost->phone_number }}

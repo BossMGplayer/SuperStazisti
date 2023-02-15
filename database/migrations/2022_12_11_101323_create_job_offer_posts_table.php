@@ -23,12 +23,13 @@ class CreateJobOfferPostsTable extends Migration
             $table->enum('workplace',['on-site', 'hybrid', 'remote']);
             $table->enum('employment_type',['full_time','part_time','contract', 'temporary', 'volunteer', 'internship', 'other']);
             $table->string('address');
+            $table->string('region');
             $table->integer('pay');
             $table->text('description');
             $table->string('type')->default('offer');
             $table->string('email');
             $table->string('phone_number');
-            $table->text('tags')->nullable();
+            $table->string('tags')->nullable();
             $table->timestamps();
 
             $table->index('user_id');

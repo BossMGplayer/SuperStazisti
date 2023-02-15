@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models;
@@ -35,12 +34,42 @@ class JobOfferPostController extends Controller
             'description' => 'required|string',
             'email' => 'required|email',
             'phone_number' => 'required|string',
-            'tags' => 'nullable'
+            'tags' => 'nullable',
+            'region' => 'required|string',
         ]);
 
         $jobOfferPost = auth()->user()->jobOffers()->create(array_merge($data, [
             'tags' => implode(',', request()->input('tags', []))
         ]));
+
+        return redirect()->route('profile.show', Auth::user()->id);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $jobOfferPost = Models\JobOfferPost::findOrFail($id);
+
+        if (auth()->user()->id !== $jobOfferPost->user_id) {
+            return redirect()->route('profile.show', Auth::user()->id);
+        }
+
+        $data = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'company_name' => 'nullable',
+            'job_title' => 'required|string',
+            'workplace' => 'required',
+            'employment_type' => 'required',
+            'address' => 'required|string',
+            'pay' => 'required|integer|min:0',
+            'description' => 'required|string',
+            'email' => 'required|email',
+            'phone_number' => 'required|string',
+            'tags',
+            'region' => 'required|string',
+        ]);
+
+        $jobOfferPost->update($data);
 
         return redirect()->route('profile.show', Auth::user()->id);
     }
@@ -55,6 +84,12 @@ class JobOfferPostController extends Controller
         }
 
         return view('jobOfferPosts.show', compact('jobOfferPost', 'tagsArray'));
+    }
+
+    public function delete($id)
+    {
+        Models\JobOfferPost::destroy($id);
+        return redirect()->route('profile.show', Auth::user()->id);
     }
 
     public function getFiltered(Request $request)

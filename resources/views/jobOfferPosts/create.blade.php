@@ -137,6 +137,27 @@
                 </div>
 
                 <div class="row mb-3">
+                    <label for="region" class="col-md-4 col-form-label text-md-end">Region</label>
+
+                    <div class="col-md-6">
+                        <select id="region" type="text" class="form-control @error('region') is-invalid @enderror" name="region" required autocomplete="region">
+                            <option value="bratislava">Bratislava</option>
+                            <option value="kosice">Košice</option>
+                            <option value="hurbanovo">Hurbanovo</option>
+                            <option value="banska_bystrica">Banská Bystrica</option>
+                            <option value="michalovce">Michalovce</option>
+                            <option value="zilina">Žilina</option>
+                        </select>
+
+                        @error('region')
+                        <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
                     <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
 
                     <div class="col-md-6">

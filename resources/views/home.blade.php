@@ -38,6 +38,41 @@
                                 <label class="form-check-label" for="vue">Vue</label>
                             </div>
                         </ul>
+
+                        <div class="form-group">
+                            <label for="min_pay">Minimum Pay:</label>
+                            <input type="number" class="form-control" id="min_pay" name="min_pay">
+                        </div>
+                        <div class="form-group">
+                            <label for="max_pay">Maximum Pay:</label>
+                            <input type="number" class="form-control" id="max_pay" name="max_pay">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="all-regions">
+                                <input type="checkbox" id="all-regions" name="all-regions" value="all-regions"> All Regions
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <select id="region" type="text" name="region" class="form-control @error('region') is-invalid @enderror" required autocomplete="region">
+                                <option value="bratislava">Bratislava</option>
+                                <option value="kosice">Košice</option>
+                                <option value="hurbanovo">Hurbanovo</option>
+                                <option value="banska_bystrica">Banská Bystrica</option>
+                                <option value="michalovce">Michalovce</option>
+                                <option value="zilina">Žilina</option>
+                                <option value="nitra">Nitra</option>
+                            </select>
+                        </div>
+
+                        @error('region')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+
+                        <br>
                         <input type="hidden" name="selected_tags">
                         <button type="submit" class="btn btn-primary ms-3">Filter</button>
                     </form>
@@ -57,7 +92,7 @@
                                     <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
                                     <hr>
                                     <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobRequest->employment_type ))}}</p>
-                                    <p class="card-text">{{ $jobRequest->address }}</p>
+                                    <p class="card-text">{{ ucfirst($jobRequest->region)}}, {{ $jobRequest->address }}</p>
                                     <p class="card-text">{{ $jobRequest->pay }}eur/h</p>
                                 </div>
                             </div>
@@ -79,7 +114,7 @@
                                     <h5 class="card-title">{{ $jobOffer->job_title }}</h5>
                                     <hr>
                                     <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type ))}}</p>
-                                    <p class="card-text">{{ $jobOffer->address }}</p>
+                                    <p class="card-text">{{ ucfirst($jobOffer->region)}}, {{ $jobOffer->address }}</p>
                                     <p class="card-text">{{ $jobOffer->pay }}eur/h</p>
                                 </div>
                             </div>

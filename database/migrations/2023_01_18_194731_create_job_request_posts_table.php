@@ -23,6 +23,7 @@ class CreateJobRequestPostsTable extends Migration
             $table->enum('workplace',['on-site', 'hybrid', 'remote']);
             $table->enum('employment_type',['full_time','part_time','contract', 'temporary', 'volunteer', 'internship', 'other']);
             $table->string('address');
+            $table->string('region');
             $table->integer('pay');
             $table->text('description');
             $table->string('type')->default('request');

@@ -34,7 +34,8 @@ class JobRequestPostController extends Controller
             'description' => 'required|string',
             'email' => 'required|email',
             'phone_number' => 'required|string',
-            'tags' => 'nullable'
+            'tags' => 'nullable',
+            'region' => 'required|string',
         ]);
 
         $jobRequestPost = auth()->user()->jobRequests()->create(array_merge($data, [
@@ -64,7 +65,8 @@ class JobRequestPostController extends Controller
             'description' => 'required|string',
             'email' => 'required|email',
             'phone_number' => 'required|string',
-            'tags'
+            'tags',
+            'region' => 'required|string',
         ]);
 
         $jobRequestPost->update($data);
@@ -82,6 +84,12 @@ class JobRequestPostController extends Controller
         }
 
         return view('jobRequestPosts.show', compact('jobRequestPost', 'tagsArray'));
+    }
+
+    public function delete($id)
+    {
+        Models\JobRequestPost::destroy($id);
+        return redirect()->route('profile.show', Auth::user()->id);
     }
 
     public function getFiltered(Request $request)

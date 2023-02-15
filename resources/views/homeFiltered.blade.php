@@ -38,6 +38,34 @@
                                 <label class="form-check-label" for="vue">Vue</label>
                             </div>
                         </ul>
+
+                        <div class="form-group">
+                            <label for="min_pay">Minimum Pay:</label>
+                            <input type="number" class="form-control" id="min_pay" name="min_pay">
+                        </div>
+                        <div class="form-group">
+                            <label for="max_pay">Maximum Pay:</label>
+                            <input type="number" class="form-control" id="max_pay" name="max_pay">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="all-regions">
+                                <input type="checkbox" id="all-regions" name="all-regions" value="all-regions"> All Regions
+                            </label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <select id="region" type="text" name="region" required autocomplete="region">>
+                                <option value="bratislava">Bratislava</option>
+                                <option value="kosice">Košice</option>
+                                <option value="hurbanovo">Hurbanovo</option>
+                                <option value="banska_bystrica">Banská Bystrica</option>
+                                <option value="michalovce">Michalovce</option>
+                                <option value="zilina">Žilina</option>
+                                <option value="nitra">Nitra</option>
+                            </select>
+                        </div>
+
                         <input type="hidden" name="selected_tags">
                         <button type="submit" class="btn btn-primary ms-3">Filter</button>
                     </form>
