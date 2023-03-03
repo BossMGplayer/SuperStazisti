@@ -47,15 +47,13 @@
                             <label for="max_pay">Maximum Pay:</label>
                             <input type="number" class="form-control" id="max_pay" name="max_pay">
                         </div>
+
                         <br>
-                        <div class="form-group">
-                            <label for="all-regions">
-                                <input type="checkbox" id="all-regions" name="all-regions" value="all-regions"> All Regions
-                            </label>
-                        </div>
 
                         <div class="form-group">
+                            Region
                             <select id="region" type="text" name="region" class="form-control @error('region') is-invalid @enderror" required autocomplete="region">
+                                <option value="all">-- All --</option>
                                 <option value="bratislava">Bratislava</option>
                                 <option value="kosice">Košice</option>
                                 <option value="hurbanovo">Hurbanovo</option>
@@ -67,6 +65,46 @@
                         </div>
 
                         @error('region')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+
+                        <br>
+
+                        <div class="form-group">
+                            Employment type
+                            <select id="employment_type" type="text" name="employment_type" class="form-control @error('employment_type') is-invalid @enderror" required autocomplete="employment_type">
+                                <option value="all">-- All --</option>
+                                <option value="full_time">Full time</option>
+                                <option value="part_time">Part time</option>
+                                <option value="contract">Contract</option>
+                                <option value="temporary">Temporary</option>
+                                <option value="volunteer">Volunteer</option>
+                                <option value="internship">Intership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        @error('employment_type')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+
+                        <br>
+
+                        <div class="form-group">
+                            Workplace
+                            <select id="workplace" type="text" name="workplace" class="form-control @error('workplace') is-invalid @enderror" required autocomplete="workplace">
+                                <option value="all">-- All --</option>
+                                <option value="on-site">On-site</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="remote">Remote</option>
+                            </select>
+                        </div>
+
+                        @error('workplace')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

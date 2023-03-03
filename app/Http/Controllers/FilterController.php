@@ -37,12 +37,38 @@ class FilterController extends Controller
     public function FilterByRegion($jobOfferPosts, $jobRequestPosts, Request $request)
     {
         $selectedRegion = $request->input('region');
-        $allRegions = $request->input('all-regions');
 
-        if ($allRegions != 'all-regions')
+
+        if ($selectedRegion != 'all')
         {
             $jobOfferPosts = $jobOfferPosts->where('region', $selectedRegion);
             $jobRequestPosts = $jobRequestPosts->where('region', $selectedRegion);
+        }
+
+        return $this->FilterByEmploymentType($jobOfferPosts, $jobRequestPosts, $request);
+    }
+
+    public function FilterByEmploymentType($jobOfferPosts, $jobRequestPosts, Request $request)
+    {
+        $selected = $request->input('employment_type');
+
+        if ($selected != 'all')
+        {
+            $jobOfferPosts = $jobOfferPosts->where('employment_type', $selected);
+            $jobRequestPosts = $jobRequestPosts->where('employment_type', $selected);
+        }
+
+        return $this->FilterByWorkplace($jobOfferPosts, $jobRequestPosts, $request);
+    }
+
+    public function FilterByWorkplace($jobOfferPosts, $jobRequestPosts, Request $request)
+    {
+        $selectedWorkplace = $request->input('workplace');
+
+        if ($selectedWorkplace != 'all')
+        {
+            $jobOfferPosts = $jobOfferPosts->where('workplace', $selectedWorkplace);
+            $jobRequestPosts = $jobRequestPosts->where('workplace', $selectedWorkplace);
         }
 
         return $this->FilterByPay($jobOfferPosts, $jobRequestPosts, $request);
