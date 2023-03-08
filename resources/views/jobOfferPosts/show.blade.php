@@ -13,6 +13,7 @@
                 <div class="col-sm-12 col-md-12 col-lg-9">
                     <div class="pt-3">
                         <h1>{{  $jobPost->job_title }}</h1>
+                        {{ $jobPost->type }}}
                     </div>
 
                     <div>
