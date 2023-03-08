@@ -62,6 +62,7 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    /*
     public function jobOffers()
     {
         return $this->hasMany(JobOfferPost::class)->orderBy('created_at','DESC');
@@ -70,6 +71,12 @@ class User extends Authenticatable
     public function jobRequests()
     {
         return $this->hasMany(JobRequestPost::class)->orderBy('created_at', 'DESC');
+    }
+*/
+
+    public function posts()
+    {
+        return $this->hasMany(JobPost::class)->orderBy('created_at','DESC');
     }
 
     public function languages()

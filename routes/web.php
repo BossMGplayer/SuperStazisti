@@ -22,13 +22,9 @@ Auth::routes();
 
 Route::post('/home/filtered', [\App\Http\Controllers\FilterController::class, 'FilterByTags'])->name('filterByTags');
 
-Route::get('/jo/create', [App\Http\Controllers\JobOfferPostController::class, 'create']);
-Route::get('/jo/{jobOfferPost}', [App\Http\Controllers\JobOfferPostController::class, 'show'])->name('jo.show');
-Route::post('/jo', [App\Http\Controllers\JobOfferPostController::class, 'store'])->name('jo.store');
-
-Route::get('/jr/create', [App\Http\Controllers\JobRequestPostController::class, 'create']);
-Route::get('/jr/{jobRequestPost}', [App\Http\Controllers\JobRequestPostController::class, 'show'])->name('jr.show');
-Route::post('/jr', [App\Http\Controllers\JobRequestPostController::class, 'store'])->name('jr.store');
+Route::get('/post/create', [App\Http\Controllers\JobPostController::class, 'create']);
+Route::get('/post/{jobOfferPost}', [App\Http\Controllers\JobPostController::class, 'show'])->name('post.show');
+Route::post('/post', [App\Http\Controllers\JobPostController::class, 'store'])->name('post.store');
 
 Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
 Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.show');

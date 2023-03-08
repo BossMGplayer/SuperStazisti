@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JobOfferPost;
-use App\Models\JobRequestPost;
+use App\Models\JobPost;
 use Illuminate\Http\Request;
 use App\Models;
 
@@ -13,8 +12,8 @@ class FilterController extends Controller
     {
         $selectedTags = $request->input('tags');
 
-        $jobOfferPosts = JobOfferPost::query();
-        $jobRequestPosts = JobRequestPost::query();
+        $jobOfferPosts = JobPost::query()->where('type', 'offer');
+        $jobRequestPosts = JobPost::query()->where('type', 'request');
 
         if (!empty($selectedTags)) {
             $jobOfferPosts = $jobOfferPosts->where(function ($query) use ($selectedTags) {
@@ -39,8 +38,7 @@ class FilterController extends Controller
         $selectedRegion = $request->input('region');
 
 
-        if ($selectedRegion != 'all')
-        {
+        if ($selectedRegion != 'all') {
             $jobOfferPosts = $jobOfferPosts->where('region', $selectedRegion);
             $jobRequestPosts = $jobRequestPosts->where('region', $selectedRegion);
         }
@@ -52,8 +50,7 @@ class FilterController extends Controller
     {
         $selected = $request->input('employment_type');
 
-        if ($selected != 'all')
-        {
+        if ($selected != 'all') {
             $jobOfferPosts = $jobOfferPosts->where('employment_type', $selected);
             $jobRequestPosts = $jobRequestPosts->where('employment_type', $selected);
         }
@@ -65,8 +62,7 @@ class FilterController extends Controller
     {
         $selectedWorkplace = $request->input('workplace');
 
-        if ($selectedWorkplace != 'all')
-        {
+        if ($selectedWorkplace != 'all') {
             $jobOfferPosts = $jobOfferPosts->where('workplace', $selectedWorkplace);
             $jobRequestPosts = $jobRequestPosts->where('workplace', $selectedWorkplace);
         }

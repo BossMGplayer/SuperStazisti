@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JobOfferPost extends Model
+class JobPost extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'first_name',
         'last_name',
+        'type',
         'company_name',
         'job_title',
         'workplace',
@@ -30,6 +31,7 @@ class JobOfferPost extends Model
         return $this->belongsTo(User::class);
     }
 
+    /*
     public function scopeWithTags($query, $tags)
     {
         return $query->where(function ($query) use ($tags) {
@@ -38,4 +40,6 @@ class JobOfferPost extends Model
             }
         });
     }
+    */
 }
+

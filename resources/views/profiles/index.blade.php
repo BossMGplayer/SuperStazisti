@@ -144,6 +144,7 @@
                                         </button>
                                     </form>
                                 @endforeach
+
                         @else
                             <p>No languages.</p>
                         @endif
@@ -156,26 +157,29 @@
             <div class="col-6">
                 <h3 class="mb-3">Job Offers</h3>
                 <div class="card-deck">
-                    @foreach($user->jobOffers as $jobOffer)
-                        <a href="/jo/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $jobOffer->job_title }}</h5>
-                                    <hr>
-                                    <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type)) }}</p>
-                                    <p class="card-text">{{ $jobOffer->address }}</p>
-                                    <p class="card-text">{{ $jobOffer->pay }}eur/h</p>
+                    @foreach($user->posts as $jobOffer)
+                        @if ($jobOffer->type == 'offer')
+                            <a href="/post/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $jobOffer->job_title }}</h5>
+                                        <hr>
+                                        <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type)) }}</p>
+                                        <p class="card-text">{{ $jobOffer->address }}</p>
+                                        <p class="card-text">{{ $jobOffer->pay }}eur/h</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        @endif
                     @endforeach
                 </div>
             </div>
             <div class="col-6">
                 <h3 class="mb-3">Job Requests</h3>
                 <div class="card-deck">
-                    @foreach($user->jobRequests as $jobRequest)
-                        <a href="/jr/{{ $jobRequest->id }}" class="text-decoration-none link-dark">
+                    @foreach($user->posts as $jobRequest)
+                        @if ($jobRequest->type == 'request')
+                        <a href="/post/{{ $jobRequest->id }}" class="text-decoration-none link-dark">
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
@@ -186,6 +190,7 @@
                                 </div>
                             </div>
                         </a>
+                        @endif
                     @endforeach
                 </div>
             </div>

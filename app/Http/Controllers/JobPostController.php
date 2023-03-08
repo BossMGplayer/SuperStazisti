@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models;
 
-class JobOfferPostController extends Controller
+class JobPostController extends Controller
 {
     public function __construct()
     {
@@ -22,9 +22,11 @@ class JobOfferPostController extends Controller
 
     public function store()
     {
+
         $data = request()->validate([
             'first_name' => 'required|string',
             'last_name' => 'required|string',
+            'type' => 'required|string',
             'company_name' => 'nullable',
             'job_title' => 'required|string',
             'workplace' => 'required',
@@ -38,7 +40,7 @@ class JobOfferPostController extends Controller
             'region' => 'required|string',
         ]);
 
-        $jobOfferPost = auth()->user()->jobOffers()->create(array_merge($data, [
+        $jobPost = auth()->user()->posts()->create(array_merge($data, [
             'tags' => implode(',', request()->input('tags', []))
         ]));
 
@@ -47,15 +49,16 @@ class JobOfferPostController extends Controller
 
     public function update(Request $request, $id)
     {
-        $jobOfferPost = Models\JobOfferPost::findOrFail($id);
+        $jobPost = Models\JobPost::findOrFail($id);
 
-        if (auth()->user()->id !== $jobOfferPost->user_id) {
+        if (auth()->user()->id !== $jobPost->user_id) {
             return redirect()->route('profile.show', Auth::user()->id);
         }
 
         $data = $request->validate([
             'first_name' => 'required|string',
             'last_name' => 'required|string',
+            'type' => 'required|string',
             'company_name' => 'nullable',
             'job_title' => 'required|string',
             'workplace' => 'required',
@@ -69,42 +72,26 @@ class JobOfferPostController extends Controller
             'region' => 'required|string',
         ]);
 
-        $jobOfferPost->update($data);
+        $jobPost->update($data);
 
         return redirect()->route('profile.show', Auth::user()->id);
     }
 
     public function show($id)
     {
-        $jobOfferPost = Models\JobOfferPost::findOrFail($id);
+        $jobPost = Models\JobPost::findOrFail($id);
 
         $tagsArray = [];
-        if ($jobOfferPost->tags && $jobOfferPost->tags !== '') {
-            $tagsArray = explode(',', $jobOfferPost->tags);
+        if ($jobPost->tags && $jobPost->tags !== '') {
+            $tagsArray = explode(',', $jobPost->tags);
         }
 
-        return view('jobOfferPosts.show', compact('jobOfferPost', 'tagsArray'));
+        return view('jobOfferPosts.show', compact('jobPost', 'tagsArray'));
     }
 
     public function delete($id)
     {
-        Models\JobOfferPost::destroy($id);
+        Models\JobPost::destroy($id);
         return redirect()->route('profile.show', Auth::user()->id);
     }
-
-    public function getFiltered(Request $request)
-    {
-        $selectedTags = $request->input('selected_tags');
-        $selectedTags = explode(',', $selectedTags);
-        $filteredJOPosts = Models\JobOfferPost::where(function ($query) use ($selectedTags) {
-            foreach ($selectedTags as $tag) {
-                $query->orWhere('tags', 'LIKE', '%' . $tag . '%');
-            }
-        })->get();
-
-        return view('homeFiltered', compact($filteredJOPosts));
-    }
-
-
-
 }

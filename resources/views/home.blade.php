@@ -123,19 +123,22 @@
                 </div>
                 <hr class="mt-0 mb-3">
                 <div class="p-3">
-                    @foreach(\App\Models\JobRequestPost::all() as $jobRequest)
-                        <a href="/jr/{{ $jobRequest->id }}" class="text-decoration-none link-dark">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
-                                    <hr>
-                                    <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobRequest->employment_type ))}}</p>
-                                    <p class="card-text">{{ ucfirst($jobRequest->region)}}, {{ $jobRequest->address }}</p>
-                                    <p class="card-text">{{ $jobRequest->pay }}eur/h</p>
+                    @foreach(\App\Models\JobPost::all() as $jobRequest)
+                        @if ($jobRequest->type == 'request')
+                            <a href="/jr/{{ $jobRequest->id }}" class="text-decoration-none link-dark">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
+                                        <hr>
+                                        <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobRequest->employment_type ))}}</p>
+                                        <p class="card-text">{{ ucfirst($jobRequest->region)}}, {{ $jobRequest->address }}</p>
+                                        <p class="card-text">{{ $jobRequest->pay }}eur/h</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        @endif
                     @endforeach
+
                 </div>
             </div>
 
@@ -145,19 +148,22 @@
                 </div>
                 <hr class="mt-0 mb-3">
                 <div class="p-3">
-                    @foreach(\App\Models\JobOfferPost::all() as $jobOffer)
-                        <a href="/jo/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $jobOffer->job_title }}</h5>
-                                    <hr>
-                                    <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type ))}}</p>
-                                    <p class="card-text">{{ ucfirst($jobOffer->region)}}, {{ $jobOffer->address }}</p>
-                                    <p class="card-text">{{ $jobOffer->pay }}eur/h</p>
+                    @foreach(\App\Models\JobPost::all() as $jobOffer)
+                        @if ($jobOffer->type == 'offer')
+                            <a href="/jr/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $jobOffer->job_title }}</h5>
+                                        <hr>
+                                        <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type ))}}</p>
+                                        <p class="card-text">{{ ucfirst($jobOffer->region)}}, {{ $jobOffer->address }}</p>
+                                        <p class="card-text">{{ $jobOffer->pay }}eur/h</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        @endif
                     @endforeach
+
                 </div>
             </div>
         </div>

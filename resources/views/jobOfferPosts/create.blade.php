@@ -2,13 +2,26 @@
 
 @section('content')
     <div class="container">
-        <form action="{{route('jo.store')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
             @csrf
 
-            <div class="button-container" style="text-align: center;">
-                <a href="/jo/create" class="btn btn-primary mr-2" style="margin-right: 8px;">Job Offer</a>
-                <a href="/jr/create" class="btn btn-secondary" style="margin-left: 8px;">Job Request</a>
+            <div class="row mb-3">
+                <label for="type" class="col-md-4 col-form-label text-md-end">Post Type</label>
+
+                <div class="col-md-6">
+                    <select id="type" type="text" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}" required autocomplete="type">
+                        <option value="offer">Offer</option>
+                        <option value="request">Request</option>
+                    </select>
+
+                    @error('type')
+                    <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                    @enderror
+                </div>
             </div>
+
             <hr style="width: 100%; height: 1px; background-color: #ccc; margin: 16px 0;">
 
             <div class="col-8 offset-2">

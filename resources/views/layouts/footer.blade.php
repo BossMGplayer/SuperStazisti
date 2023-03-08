@@ -2,7 +2,7 @@
 
 <footer class="py-4 bg-light text-muted mt-5"> <!-- fixed-bottom -->
     <div class="container d-flex justify-content-center">
-        <a href="/jo/create" class="btn btn-primary rounded-circle">
+        <a href="/post/create" class="btn btn-primary rounded-circle">
             <i class="fas fa-plus"></i>
         </a>
     </div>
