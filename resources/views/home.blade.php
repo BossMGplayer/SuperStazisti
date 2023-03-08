@@ -125,7 +125,7 @@
                 <div class="p-3">
                     @foreach(\App\Models\JobPost::all() as $jobRequest)
                         @if ($jobRequest->type == 'request')
-                            <a href="/jr/{{ $jobRequest->id }}" class="text-decoration-none link-dark">
+                            <a href="/post/{{ $jobRequest->id }}" class="text-decoration-none link-dark">
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
@@ -150,7 +150,7 @@
                 <div class="p-3">
                     @foreach(\App\Models\JobPost::all() as $jobOffer)
                         @if ($jobOffer->type == 'offer')
-                            <a href="/jr/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
+                            <a href="/post/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $jobOffer->job_title }}</h5>
