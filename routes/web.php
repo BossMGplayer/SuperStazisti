@@ -22,6 +22,9 @@ Auth::routes();
 
 Route::post('/home/filtered', [\App\Http\Controllers\FilterController::class, 'FilterByTags'])->name('filterByTags');
 
+Route::get('/change-password', [\App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
+Route::post('/change-password', [\App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
+
 Route::get('/post/create', [App\Http\Controllers\JobPostController::class, 'create']);
 Route::get('/post/{jobOfferPost}', [App\Http\Controllers\JobPostController::class, 'show'])->name('post.show');
 Route::post('/post', [App\Http\Controllers\JobPostController::class, 'store'])->name('post.store');

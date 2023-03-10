@@ -2,6 +2,8 @@
 
 @section('content')
     <div class="container">
+        <h1 class="ms-5">Profile settings</h1>
+        <hr>
         <form action="/profile/{{ $user->id }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('patch')
@@ -105,10 +107,17 @@
                 </div>
 
                     <div class="row pt-4">
-                        <button class="btn btn-primary">Save changes</button>
+                        <button class="btn w-50 d-block d-lg-none m-auto btn-primary">Save changes</button>
+                        <button class="btn w-25 d-none d-lg-block m-auto btn-primary">Save changes</button>
                     </div>
                 </div>
         </form>
+
+        <h1 class="ms-5 mt-5">Security settings</h1>
+        <hr>
+        <div>
+            <a href="/change-password">Change password</a>
+        </div>
     </div>
 
 @endsection
