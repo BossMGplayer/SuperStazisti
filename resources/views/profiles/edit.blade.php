@@ -115,8 +115,67 @@
 
         <h1 class="ms-5 mt-5">Security settings</h1>
         <hr>
-        <div>
-            <a href="/change-password">Change password</a>
+    @can('update', $user->profile)
+        <div class="d-flex justify-content-between ps-5">
+            <button type="button" class="btn btn-primary btn-xs ps-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Change Password
+            </button>
+        </div>
+    @endcan
+
+    <!-- Modal -->
+    <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('update-password') }}" method="POST">
+                        @csrf
+                        <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @elseif (session('error'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+
+                            <div class="mb-3">
+                                <label for="oldPasswordInput" class="form-label">Old Password</label>
+                                <input name="old_password" type="password" class="form-control @error('old_password') is-invalid @enderror" id="oldPasswordInput"
+                                       placeholder="Old Password">
+                                @error('old_password')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="newPasswordInput" class="form-label">New Password</label>
+                                <input name="new_password" type="password" class="form-control @error('new_password') is-invalid @enderror" id="newPasswordInput"
+                                       placeholder="New Password">
+                                @error('new_password')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmNewPasswordInput" class="form-label">Confirm New Password</label>
+                                <input name="new_password_confirmation" type="password" class="form-control" id="confirmNewPasswordInput"
+                                       placeholder="Confirm New Password">
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer">
+                            <button class="btn btn-primary">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
