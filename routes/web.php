@@ -20,6 +20,8 @@ Route::get('/home', function () {
 
 Auth::routes();
 
+Route::post('/follow/{user}', [\App\Http\Controllers\FollowsController::class, 'store']);
+
 Route::post('/home/filtered', [\App\Http\Controllers\FilterController::class, 'FilterByTags'])->name('filterByTags');
 
 Route::get('/change-password', [\App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');

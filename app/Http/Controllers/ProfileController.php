@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
     public function index(User $user)
     {
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+
         $languages = $user->languages()->get();
-        return view('profiles.index', compact('user', 'languages'));
+
+        return view('profiles.index', compact('user', 'languages', 'follows'));
     }
 
     public function edit(User $user)

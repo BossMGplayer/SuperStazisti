@@ -62,21 +62,14 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
-    /*
-    public function jobOffers()
-    {
-        return $this->hasMany(JobOfferPost::class)->orderBy('created_at','DESC');
-    }
-
-    public function jobRequests()
-    {
-        return $this->hasMany(JobRequestPost::class)->orderBy('created_at', 'DESC');
-    }
-*/
-
     public function posts()
     {
         return $this->hasMany(JobPost::class)->orderBy('created_at','DESC');
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(Profile::class);
     }
 
     public function languages()

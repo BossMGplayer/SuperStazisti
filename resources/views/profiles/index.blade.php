@@ -10,11 +10,16 @@
             </div>
 
             <div class="col-sm-12 col-md-12 col-lg-9">
-                @can('update', $user->profile)
+                @if (Auth::user()->can('update', $user->profile))
                     <div class="justify-content-end d-flex">
                         <a href="/profile/{{ $user->id }}/edit">Edit profile</a>
                     </div>
-                @endcan
+                @else
+                        <div class="justify-content-end d-flex">
+                            <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
+                        </div>
+                @endif
+
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Personal Info</h4>
