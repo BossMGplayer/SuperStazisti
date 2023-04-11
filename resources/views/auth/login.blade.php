@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
 
 @section('content')
 <div class="container">
@@ -28,9 +29,11 @@
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 input-group">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary toggle-password" type="button"><i class="fa fa-eye-slash"></i></button>
+                                </div>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -38,6 +41,20 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <script>
+                            $(document).on('click', '.toggle-password', function() {
+                                var password = $("#password");
+                                var icon = $(this).find('i');
+                                if (password.attr('type') === 'password') {
+                                    password.attr('type', 'text');
+                                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                                } else {
+                                    password.attr('type', 'password');
+                                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                                }
+                            });
+                        </script>
 
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">

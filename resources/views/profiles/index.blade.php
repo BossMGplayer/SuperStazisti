@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="resources/css/app.css">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 d-flex justify-content-center align-items-center">
@@ -16,7 +15,7 @@
                     </div>
                 @else
                         <div class="justify-content-end d-flex">
-                            <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
+                            <follow-button :user-id="{{ $user->id }}" :follows="{{ $follows ? 'true' : 'false' }}" :status="{{ $status ? 'true' : 'false' }}"></follow-button>
                         </div>
                 @endif
 

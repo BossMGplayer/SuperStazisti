@@ -13,10 +13,11 @@ class ProfileController extends Controller
     public function index(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        $status = $follows;
 
         $languages = $user->languages()->get();
 
-        return view('profiles.index', compact('user', 'languages', 'follows'));
+        return view('profiles.index', compact('user', 'languages', 'follows', 'status'));
     }
 
     public function edit(User $user)

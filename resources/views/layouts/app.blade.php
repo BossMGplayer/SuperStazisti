@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 
@@ -55,6 +55,38 @@
                                 </li>
                             @endif
                         @else
+                            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-bell-512.png"
+                                 onclick="document.querySelector('#Notifications').modal('show')"
+                                 alt="Notifications"
+                                 width="24" height="24"
+                                 class="mt-2"
+                                 id="notifications-icon"
+                                 style="cursor: pointer">
+
+                            <!-- Modal -->
+                            <div class="modal" id="Notifications" tabindex="-1" aria-labelledby="NotificationsLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="NotificationsLabel">Notifications</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>
+                                                @foreach(auth()->user()->following as $user)
+                                                    <ul style="display: flex">
+                                                        <div class="mt-1">
+                                                            {{ $user->email }}
+                                                        </div>
+                                                        <follow-button :user-id="{{ $user->id }}" follows=true status=true class="ms-5"></follow-button>
+                                                    </ul>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->email }}
@@ -85,5 +117,14 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#notifications-icon').click(function() {
+                $('#Notifications').modal('show');
+            });
+        });
+    </script>
+
 </body>
 </html>

@@ -10,13 +10,11 @@ export default {
     mounted() {
         console.log('Component mounted.')
     },
-
     data: function () {
         return {
-            status: this.status,
+            status: this.follows,
         }
     },
-
     methods: {
         followUser() {
             axios.post('/follow/' + this.userId)
@@ -25,7 +23,7 @@ export default {
                     console.log(response.data);
                 })
                 .catch(errors => {
-                    if (errors.response.status === 401) {
+                    if (errors.response.status == 401) {
                         window.location = '/login';
                     }
                 });

@@ -117,18 +117,18 @@
         <hr>
     @can('update', $user->profile)
         <div class="d-flex justify-content-between ps-5">
-            <button type="button" class="btn btn-primary btn-xs ps-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary btn-xs ps-3" data-bs-toggle="modal" data-bs-target="#ChangePasswordModal">
                 Change Password
             </button>
         </div>
     @endcan
 
     <!-- Modal -->
-    <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal" id="ChangePasswordModal" tabindex="-1" aria-labelledby="ChangePasswordModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                    <h1 class="modal-title fs-5" id="ChangePasswordModalLabel">Change Password</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

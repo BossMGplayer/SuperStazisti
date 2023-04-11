@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewPostMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models;
+use Illuminate\Support\Facades\Mail;
 
 class JobPostController extends Controller
 {
@@ -22,7 +24,6 @@ class JobPostController extends Controller
 
     public function store()
     {
-
         $data = request()->validate([
             'first_name' => 'required|string',
             'last_name' => 'required|string',
@@ -43,6 +44,14 @@ class JobPostController extends Controller
         $jobPost = auth()->user()->posts()->create(array_merge($data, [
             'tags' => implode(',', request()->input('tags', []))
         ]));
+
+        $user = $jobPost->user;
+        $followers = $user->following;
+        if ($followers->count() > 0) {
+            foreach ($followers as $follower) {
+                Mail::to($follower->email)->send(new NewPostMail($jobPost, $user, $follower->first_name));
+            }
+        }
 
         return redirect()->route('profile.show', Auth::user()->id);
     }
