@@ -15,20 +15,20 @@ class NewPostMail extends Mailable
 
     public $jobPost;
     public $user;
-    public $followerName;
+    public $follower;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($jobPost, $user, $followerName)
+    public function __construct($jobPost, $user, $follower)
     {
         $this->jobPost = $jobPost;
         $this->user = $user;
-        $this->followerName = $followerName;
+        $this->follower = $follower;
 
-        $this->from('TheDevTeam@gmail.com', 'The dev team');
+        $this->from($user->email);
     }
 
     /**
@@ -43,7 +43,7 @@ class NewPostMail extends Mailable
             ->with([
                 'jobPost' => $this->jobPost,
                 'user' => $this->user,
-                'followerName' => $this->followerName,
+                'follower' => $this->follower,
             ]);
     }
 }

@@ -45,11 +45,12 @@ class JobPostController extends Controller
             'tags' => implode(',', request()->input('tags', []))
         ]));
 
-        $user = $jobPost->user;
-        $followers = $user->following;
+        $sender = $jobPost->user;
+        $followers = $sender->profile->followers;
         if ($followers->count() > 0) {
             foreach ($followers as $follower) {
-                Mail::to($follower->email)->send(new NewPostMail($jobPost, $user, $follower->first_name));
+                Mail::to($follower->email)->send(new NewPostMail($jobPost, $sender, $follower));
+
             }
         }
 
