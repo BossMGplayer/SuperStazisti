@@ -28,7 +28,7 @@ class NewPostMail extends Mailable
         $this->user = $user;
         $this->follower = $follower;
 
-        $this->from($user->email);
+        $this->from("devteam@dev.com");
     }
 
     /**

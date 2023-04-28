@@ -73,14 +73,13 @@
                                         </div>
                                         <div class="modal-body">
                                             <div>
-                                                @foreach(auth()->user()->following as $user)
-                                                    <ul style="display: flex">
-                                                        <div class="mt-1">
-                                                            {{ $user->email }}
-                                                        </div>
-                                                        <follow-button :user-id="{{ $user->id }}" follows=true status=true class="ms-5"></follow-button>
-                                                    </ul>
-                                                @endforeach
+                                                <ul>
+                                                    @forelse(auth()->user()->notifications as $notification)
+                                                        <li>{{ $notification->data['message'] }}</li>
+                                                    @empty
+                                                        <p>No notifications.</p>
+                                                    @endforelse
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>

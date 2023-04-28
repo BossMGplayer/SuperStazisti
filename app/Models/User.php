@@ -76,5 +76,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Language::class)->orderBy('created_at', 'DESC');
     }
-
 }
