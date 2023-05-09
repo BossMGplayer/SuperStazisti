@@ -18,6 +18,7 @@ class CreateNewPostNotificationsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('job_post_id');
             $table->string('type');
+            $table->text('message');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

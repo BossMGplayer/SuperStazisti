@@ -51,7 +51,7 @@ class JobPostController extends Controller
         if ($followers->count() > 0) {
             foreach ($followers as $follower) {
                 Mail::to($follower->email)->send(new NewPostMail($jobPost, $sender, $follower));
-                $follower->notify(new NewPostNotification($jobPost, $sender, $follower, 'new_post'));
+                $follower->notify(new NewPostNotification($jobPost, $sender, $follower, $data['type']));
             }
         }
 

@@ -54,7 +54,8 @@ class NewPostNotification extends Notification
             'jobPost' => $this->jobPost,
             'sender' => $this->sender,
             'follower' => $this->follower,
-            'type' => $this->type
+            'type' => $this->type,
+            'message' => $this->sender->profile->first_name . " " . $this->sender->profile->last_name . " has created a new job " . $this->type . ". Check it out."
         ];
     }
 }

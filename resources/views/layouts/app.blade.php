@@ -75,8 +75,10 @@
                                             <div>
                                                 <ul>
                                                     @forelse(auth()->user()->notifications as $notification)
-                                                        <li>{{ $notification->data['message'] }}</li>
-                                                    @empty
+                                                        <ul>
+                                                            <a href="/post/{{ $notification->data['jobPost']['id'] }}">{{ $notification->data['message'] }}</a>
+                                                        </ul>
+                                                        @empty
                                                         <p>No notifications.</p>
                                                     @endforelse
                                                 </ul>
