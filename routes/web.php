@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FilterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,6 +24,7 @@ Auth::routes();
 Route::post('/follow/{user}', [\App\Http\Controllers\FollowsController::class, 'store']);
 
 Route::post('/home/filtered', [\App\Http\Controllers\FilterController::class, 'FilterByTags'])->name('filterByTags');
+Route::get('/search', [FilterController::class, 'Search'])->name('search');
 
 Route::get('/change-password', [\App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
 Route::post('/change-password', [\App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
