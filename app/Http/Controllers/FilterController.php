@@ -8,27 +8,7 @@ use App\Models;
 
 class FilterController extends Controller
 {
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-
-        $jobOfferPosts = JobPost::query()->where('type', 'offer');
-        $jobRequestPosts = JobPost::query()->where('type', 'request');
-
-        if (!empty($query)) {
-            $jobOfferPosts = $jobOfferPosts->where(function ($q) use ($query) {
-                $q->where('job_title', 'like', '%' . $query . '%');
-            });
-
-            $jobRequestPosts = $jobRequestPosts->where(function ($q) use ($query) {
-                $q->where('job_title', 'like', '%' . $query . '%');
-            });
-        }
-
-        return $this->filterByTags($jobOfferPosts, $jobRequestPosts, $request);
-    }
-
-    public function FilterByTags($jobOfferPosts, $jobRequestPosts, $request)
+    public function FilterByTags(Request $request)
     {
         $selectedTags = $request->input('tags');
 
@@ -51,7 +31,6 @@ class FilterController extends Controller
 
         return $this->FilterByRegion($jobOfferPosts, $jobRequestPosts, $request);
     }
-
 
     public function FilterByRegion($jobOfferPosts, $jobRequestPosts, Request $request)
     {

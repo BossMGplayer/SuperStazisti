@@ -30,10 +30,13 @@
                     <div class="pt-2 ps-3">WorkedOut</div>
                 </a>
 
-                <form action="{{ route('search') }}" method="GET">
-                    <input type="text" name="query" placeholder="Search...">
-                    <button type="submit">Search</button>
-                </form>
+                <div>
+                    <form action="{{ route('search') }}" method="get">
+                        @csrf
+                        <input type="text" name="title" placeholder="Search...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
