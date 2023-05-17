@@ -64,54 +64,6 @@
                             </select>
                         </div>
 
-                        @error('region')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-
-                        <br>
-
-                        <div class="form-group">
-                            Employment type
-                            <select id="employment_type" type="text" name="employment_type" class="form-control @error('employment_type') is-invalid @enderror" required autocomplete="employment_type">
-                                <option value="all">-- All --</option>
-                                <option value="full_time">Full time</option>
-                                <option value="part_time">Part time</option>
-                                <option value="contract">Contract</option>
-                                <option value="temporary">Temporary</option>
-                                <option value="volunteer">Volunteer</option>
-                                <option value="internship">Intership</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-
-                        @error('employment_type')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-
-                        <br>
-
-                        <div class="form-group">
-                            Workplace
-                            <select id="workplace" type="text" name="workplace" class="form-control @error('workplace') is-invalid @enderror" required autocomplete="workplace">
-                                <option value="all">-- All --</option>
-                                <option value="on-site">On-site</option>
-                                <option value="hybrid">Hybrid</option>
-                                <option value="remote">Remote</option>
-                            </select>
-                        </div>
-
-                        @error('workplace')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-
-                        <br>
-                        <input type="hidden" name="selected_tags">
                         <button type="submit" class="btn btn-primary ms-3">Filter</button>
                     </form>
                 </div>
@@ -123,20 +75,18 @@
                 </div>
                 <hr class="mt-0 mb-3">
                 <div class="p-3">
-                    @foreach(\App\Models\JobPost::all() as $jobRequest)
-                        @if ($jobRequest->type == 'request')
-                            <a href="/post/{{ $jobRequest->id }}" class="text-decoration-none link-dark">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
-                                        <hr>
-                                        <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobRequest->employment_type ))}}</p>
-                                        <p class="card-text">{{ ucfirst($jobRequest->region)}}, {{ $jobRequest->address }}</p>
-                                        <p class="card-text">{{ $jobRequest->pay }}eur/h</p>
-                                    </div>
+                    @foreach($jobRequestPosts as $jobRequest)
+                        <a href="/post/{{ $jobRequest->id }}" class="text-decoration-none link-dark">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $jobRequest->job_title }}</h5>
+                                    <hr>
+                                    <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobRequest->employment_type))}}</p>
+                                    <p class="card-text">{{ ucfirst($jobRequest->region)}}, {{ $jobRequest->address }}</p>
+                                    <p class="card-text">{{ $jobRequest->pay }}eur/h</p>
                                 </div>
-                            </a>
-                        @endif
+                            </div>
+                        </a>
                     @endforeach
 
                 </div>
@@ -148,27 +98,22 @@
                 </div>
                 <hr class="mt-0 mb-3">
                 <div class="p-3">
-                    @foreach(\App\Models\JobPost::all() as $jobOffer)
-                        @if ($jobOffer->type == 'offer')
-                            <a href="/post/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $jobOffer->job_title }}</h5>
-                                        <hr>
-                                        <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type ))}}</p>
-                                        <p class="card-text">{{ ucfirst($jobOffer->region)}}, {{ $jobOffer->address }}</p>
-                                        <p class="card-text">{{ $jobOffer->pay }}eur/h</p>
-                                    </div>
+                    @foreach($jobOfferPosts as $jobOffer)
+                        <a href="/post/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $jobOffer->job_title }}</h5>
+                                    <hr>
+                                    <p class="card-text">{{ ucfirst(str_replace('_', ' ', $jobOffer->employment_type))}}</p>
+                                    <p class="card-text">{{ ucfirst($jobOffer->region)}}, {{ $jobOffer->address }}</p>
+                                    <p class="card-text">{{ $jobOffer->pay }}eur/h</p>
                                 </div>
-                            </a>
-                        @endif
+                            </div>
+                        </a>
                     @endforeach
-
                 </div>
             </div>
         </div>
-
     </div>
     </body>
-    @include('layouts.footer')
 @endsection

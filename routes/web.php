@@ -24,8 +24,7 @@ Auth::routes();
 
 Route::post('/follow/{user}', [\App\Http\Controllers\FollowsController::class, 'store']);
 
-Route::post('/home/filtered', [\App\Http\Controllers\FilterController::class, 'FilterByTags'])->name('filterByTags');
-Route::get('/home/search', [SearchController::class, 'Search'])->name('search');
+Route::post('/filter', [\App\Http\Controllers\FilterController::class, 'FilterByTags'])->name('filterByTags');
 
 Route::get('/change-password', [\App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
 Route::post('/change-password', [\App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
@@ -40,8 +39,3 @@ Route::patch('/profile/{user}', [App\Http\Controllers\ProfileController::class, 
 
 Route::post('/lang', [App\Http\Controllers\LanguageController::class, 'store'])->name('lang.store');
 Route::delete('/lang/{id}', [App\Http\Controllers\LanguageController::class, 'delete'])->name('lang.delete');
-
-Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
-Route::put('/notifications/mark-all-as-seen', [App\Http\Controllers\NotificationController::class, 'markAllAsSeen'])->name('notifications.mark-all-as-seen');
-Route::put('/notifications/{notification}/mark-as-seen', [App\Http\Controllers\NotificationController::class, 'markAsSeen'])->name('notifications.mark-as-seen');
-Route::delete('/notifications/{notification}', [App\Http\Controllers\NotificationController::class, 'destroy'])->name('notifications.destroy');

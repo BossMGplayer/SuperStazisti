@@ -8,7 +8,7 @@ use App\Models;
 
 class FilterController extends Controller
 {
-    public function FilterByTags(Request $request)
+    public function filterByTags(Request $request)
     {
         $selectedTags = $request->input('tags');
 
@@ -29,23 +29,22 @@ class FilterController extends Controller
             });
         }
 
-        return $this->FilterByRegion($jobOfferPosts, $jobRequestPosts, $request);
+        return $this->filterByRegion($jobOfferPosts, $jobRequestPosts, $request);
     }
 
-    public function FilterByRegion($jobOfferPosts, $jobRequestPosts, Request $request)
+    public function filterByRegion($jobOfferPosts, $jobRequestPosts, Request $request)
     {
         $selectedRegion = $request->input('region');
-
 
         if ($selectedRegion != 'all') {
             $jobOfferPosts = $jobOfferPosts->where('region', $selectedRegion);
             $jobRequestPosts = $jobRequestPosts->where('region', $selectedRegion);
         }
 
-        return $this->FilterByEmploymentType($jobOfferPosts, $jobRequestPosts, $request);
+        return $this->filterByEmploymentType($jobOfferPosts, $jobRequestPosts, $request);
     }
 
-    public function FilterByEmploymentType($jobOfferPosts, $jobRequestPosts, Request $request)
+    public function filterByEmploymentType($jobOfferPosts, $jobRequestPosts, Request $request)
     {
         $selected = $request->input('employment_type');
 
@@ -54,10 +53,10 @@ class FilterController extends Controller
             $jobRequestPosts = $jobRequestPosts->where('employment_type', $selected);
         }
 
-        return $this->FilterByWorkplace($jobOfferPosts, $jobRequestPosts, $request);
+        return $this->filterByWorkplace($jobOfferPosts, $jobRequestPosts, $request);
     }
 
-    public function FilterByWorkplace($jobOfferPosts, $jobRequestPosts, Request $request)
+    public function filterByWorkplace($jobOfferPosts, $jobRequestPosts, Request $request)
     {
         $selectedWorkplace = $request->input('workplace');
 
@@ -66,10 +65,10 @@ class FilterController extends Controller
             $jobRequestPosts = $jobRequestPosts->where('workplace', $selectedWorkplace);
         }
 
-        return $this->FilterByPay($jobOfferPosts, $jobRequestPosts, $request);
+        return $this->filterByPay($jobOfferPosts, $jobRequestPosts, $request);
     }
 
-    public function FilterByPay($jobOfferPosts, $jobRequestPosts, Request $request)
+    public function filterByPay($jobOfferPosts, $jobRequestPosts, Request $request)
     {
         $min_pay = $request->input('min_pay');
         $max_pay = $request->input('max_pay');
@@ -84,6 +83,6 @@ class FilterController extends Controller
         $jobOfferPosts = $jobOfferPosts->get();
         $jobRequestPosts = $jobRequestPosts->get();
 
-        return view('homeFiltered', compact('jobOfferPosts', 'jobRequestPosts'));
+        return view('home', compact('jobOfferPosts', 'jobRequestPosts'));
     }
 }
