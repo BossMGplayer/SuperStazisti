@@ -9,108 +9,130 @@
                     <h5 class="font-weight-bold m-0">Filters</h5>
                 </div>
                 <hr class="mt-0 mb-3">
+
+                @section('scripts')
+                    <script>
+                        // Store the checked state of checkboxes
+                        function storeCheckboxState() {
+                            console.log("first function")
+                            const checkboxes = document.querySelectorAll('input[name="tags[]"]');
+                            checkboxes.forEach((checkbox) => {
+                                checkbox.dataset.checked = checkbox.checked;
+                            });
+                        }
+
+                        // Call the function before filtering
+                        storeCheckboxState();
+
+                        // Restore the checked state of checkboxes
+                        function restoreCheckboxState() {
+                            console.log("second function")
+                            const checkboxes = document.querySelectorAll('input[name="tags[]"]');
+                            checkboxes.forEach((checkbox) => {
+                                const checked = checkbox.dataset.checked === 'true';
+                                checkbox.checked = checked;
+                            });
+                        }
+
+                        // Call the function after filtering
+                        restoreCheckboxState();
+                    </script>
+                @endsection
+
                 <div class="p-2">
-                    <form action="{{ route('filterByTags', ['selectedTags' => []]) }}" method="post">
-                        @csrf
+                    <form action="{{ route('home') }}" method="post">
+                    @csrf
+                    <!-- Tags -->
                         <ul class="col-md-6">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="php" name="tags[]" value="php">
-                                <label class="form-check-label" for="php">PHP</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="react" name="tags[]" value="react">
-                                <label class="form-check-label" for="react">React</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="jquery" name="tags[]" value="jquery">
-                                <label class="form-check-label" for="jquery">JQuery</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="javascript" name="tags[]" value="javascript">
-                                <label class="form-check-label" for="javascript">Javascript</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="angular" name="tags[]" value="angular">
-                                <label class="form-check-label" for="angular">Angular</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="vue" name="tags[]" value="vue">
-                                <label class="form-check-label" for="vue">Vue</label>
-                            </div>
+                            <li>
+                                <label class="container">PHP
+                                    <input type="checkbox" name="tags[]" value="PHP" data-id="php">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Java
+                                    <input type="checkbox" name="tags[]" value="Java" data-id="java">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">C++
+                                    <input type="checkbox" name="tags[]" value="C++" data-id="c++">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Vue
+                                    <input type="checkbox" name="tags[]" value="Vue" data-id="vue">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Python
+                                    <input type="checkbox" name="tags[]" value="Python" data-id="python">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Rust
+                                    <input type="checkbox" name="tags[]" value="Rust" data-id="rust">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
                         </ul>
 
+                        <!-- Minimum Pay -->
                         <div class="form-group">
                             <label for="min_pay">Minimum Pay:</label>
                             <input type="number" class="form-control" id="min_pay" name="min_pay">
                         </div>
+
+                        <!-- Maximum Pay -->
                         <div class="form-group">
                             <label for="max_pay">Maximum Pay:</label>
                             <input type="number" class="form-control" id="max_pay" name="max_pay">
                         </div>
 
-                        <br>
-
+                        <!-- Region -->
                         <div class="form-group">
-                            Region
-                            <select id="region" type="text" name="region" class="form-control @error('region') is-invalid @enderror" required autocomplete="region">
+                            <label for="region">Region:</label>
+                            <select id="region" name="region" class="form-control">
                                 <option value="all">-- All --</option>
                                 <option value="bratislava">Bratislava</option>
                                 <option value="kosice">Košice</option>
                                 <option value="hurbanovo">Hurbanovo</option>
-                                <option value="banska_bystrica">Banská Bystrica</option>
                                 <option value="michalovce">Michalovce</option>
                                 <option value="zilina">Žilina</option>
-                                <option value="nitra">Nitra</option>
                             </select>
                         </div>
 
-                        @error('region')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-
-                        <br>
-
+                        <!-- Employment Type -->
                         <div class="form-group">
-                            Employment type
-                            <select id="employment_type" type="text" name="employment_type" class="form-control @error('employment_type') is-invalid @enderror" required autocomplete="employment_type">
+                            <label for="employment_type">Employment Type:</label>
+                            <select id="employment_type" name="employment_type" class="form-control">
                                 <option value="all">-- All --</option>
                                 <option value="full_time">Full time</option>
                                 <option value="part_time">Part time</option>
                                 <option value="contract">Contract</option>
                                 <option value="temporary">Temporary</option>
                                 <option value="volunteer">Volunteer</option>
-                                <option value="internship">Intership</option>
+                                <option value="internship">Internship</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
 
-                        @error('employment_type')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-
-                        <br>
-
+                        <!-- Workplace -->
                         <div class="form-group">
-                            Workplace
-                            <select id="workplace" type="text" name="workplace" class="form-control @error('workplace') is-invalid @enderror" required autocomplete="workplace">
+                            <label for="workplace">Workplace:</label>
+                            <select id="workplace" name="workplace" class="form-control">
                                 <option value="all">-- All --</option>
                                 <option value="on-site">On-site</option>
-                                <option value="hybrid">Hybrid</option>
                                 <option value="remote">Remote</option>
+                                <option value="hybrid">Hybrid</option>
                             </select>
                         </div>
 
-                        @error('workplace')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-
-                        <br>
                         <input type="hidden" name="selected_tags">
                         <button type="submit" class="btn btn-primary ms-3">Filter</button>
                     </form>
@@ -148,7 +170,7 @@
                 </div>
                 <hr class="mt-0 mb-3">
                 <div class="p-3">
-                    @foreach(\App\Models\JobPost::all() as $jobOffer)
+                    @foreach($jobPosts as $jobOffer)
                         @if ($jobOffer->type == 'offer')
                             <a href="/post/{{ $jobOffer->id }}" class="text-decoration-none link-dark">
                                 <div class="card mb-4">
@@ -163,7 +185,6 @@
                             </a>
                         @endif
                     @endforeach
-
                 </div>
             </div>
         </div>

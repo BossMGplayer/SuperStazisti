@@ -8,103 +8,62 @@ use App\Models;
 
 class FilterController extends Controller
 {
-    public function search(Request $request)
+    public function filterPosts(Request $request)
     {
-        $query = $request->input('query');
+        // Retrieve the filter parameters from the request
+        $tags = $request->input('tags');
+        $minPay = $request->input('min_pay');
+        $maxPay = $request->input('max_pay');
+        $region = $request->input('region');
+        $employmentType = $request->input('employment_type');
+        $workplace = $request->input('workplace');
 
-        $jobOfferPosts = JobPost::query()->where('type', 'offer');
-        $jobRequestPosts = JobPost::query()->where('type', 'request');
 
-        if (!empty($query)) {
-            $jobOfferPosts = $jobOfferPosts->where(function ($q) use ($query) {
-                $q->where('job_title', 'like', '%' . $query . '%');
-            });
+        // Check if any filter parameters are selected
+        if ($tags || $minPay || $maxPay || $region || $employmentType || $workplace) {
+            // Apply the selected filters
+            $filteredPosts = \App\Models\JobPost::query();
 
-            $jobRequestPosts = $jobRequestPosts->where(function ($q) use ($query) {
-                $q->where('job_title', 'like', '%' . $query . '%');
-            });
+            $tags = is_array($tags) ? $tags : explode(',', $tags);
+            $tags = array_map('trim', $tags);
+
+            if ($tags) {
+                $filteredPosts->where(function ($query) use ($tags) {
+                    foreach ($tags as $tag) {
+                        $query->orWhere('tags', 'LIKE', '%' . $tag . '%');
+                    }
+                });
+            }
+
+            if ($minPay && $maxPay) {
+                $filteredPosts->whereBetween('pay', [$minPay, $maxPay]);
+            } elseif ($minPay) {
+                $filteredPosts->where('pay', '>=', $minPay);
+            } elseif ($maxPay) {
+                $filteredPosts->where('pay', '<=', $maxPay);
+            }
+
+            if ($region != "all") {
+                $filteredPosts->where('region', $region);
+            }
+
+            if ($employmentType != "all") {
+                $filteredPosts->where('employment_type', $employmentType);
+            }
+
+            if ($workplace != "all") {
+                $filteredPosts->where('workplace', $workplace);
+            }
+
+            // Get the filtered job posts
+            $jobPosts = $filteredPosts->get();
+        } else {
+            // No filter parameters selected, return all job posts
+            $jobPosts = \App\Models\JobPost::all();
         }
 
-        return $this->filterByTags($jobOfferPosts, $jobRequestPosts, $request);
-    }
+        // Return the job offers to the view
 
-    public function FilterByTags($jobOfferPosts, $jobRequestPosts, $request)
-    {
-        $selectedTags = $request->input('tags');
-
-        $jobOfferPosts = JobPost::query()->where('type', 'offer');
-        $jobRequestPosts = JobPost::query()->where('type', 'request');
-
-        if (!empty($selectedTags)) {
-            $jobOfferPosts = $jobOfferPosts->where(function ($query) use ($selectedTags) {
-                foreach ($selectedTags as $tag) {
-                    $query->orWhere('tags', 'like', '%' . $tag . '%');
-                }
-            });
-
-            $jobRequestPosts = $jobRequestPosts->where(function ($query) use ($selectedTags) {
-                foreach ($selectedTags as $tag) {
-                    $query->orWhere('tags', 'like', '%' . $tag . '%');
-                }
-            });
-        }
-
-        return $this->FilterByRegion($jobOfferPosts, $jobRequestPosts, $request);
-    }
-
-
-    public function FilterByRegion($jobOfferPosts, $jobRequestPosts, Request $request)
-    {
-        $selectedRegion = $request->input('region');
-
-
-        if ($selectedRegion != 'all') {
-            $jobOfferPosts = $jobOfferPosts->where('region', $selectedRegion);
-            $jobRequestPosts = $jobRequestPosts->where('region', $selectedRegion);
-        }
-
-        return $this->FilterByEmploymentType($jobOfferPosts, $jobRequestPosts, $request);
-    }
-
-    public function FilterByEmploymentType($jobOfferPosts, $jobRequestPosts, Request $request)
-    {
-        $selected = $request->input('employment_type');
-
-        if ($selected != 'all') {
-            $jobOfferPosts = $jobOfferPosts->where('employment_type', $selected);
-            $jobRequestPosts = $jobRequestPosts->where('employment_type', $selected);
-        }
-
-        return $this->FilterByWorkplace($jobOfferPosts, $jobRequestPosts, $request);
-    }
-
-    public function FilterByWorkplace($jobOfferPosts, $jobRequestPosts, Request $request)
-    {
-        $selectedWorkplace = $request->input('workplace');
-
-        if ($selectedWorkplace != 'all') {
-            $jobOfferPosts = $jobOfferPosts->where('workplace', $selectedWorkplace);
-            $jobRequestPosts = $jobRequestPosts->where('workplace', $selectedWorkplace);
-        }
-
-        return $this->FilterByPay($jobOfferPosts, $jobRequestPosts, $request);
-    }
-
-    public function FilterByPay($jobOfferPosts, $jobRequestPosts, Request $request)
-    {
-        $min_pay = $request->input('min_pay');
-        $max_pay = $request->input('max_pay');
-        $min_pay = ($min_pay) ? $min_pay : 0;
-        $max_pay = ($max_pay) ? $max_pay : PHP_INT_MAX;
-
-        if (!empty($min_pay) || !empty($max_pay)) {
-            $jobOfferPosts = $jobOfferPosts->whereBetween('pay', [$min_pay, $max_pay]);
-            $jobRequestPosts = $jobRequestPosts->whereBetween('pay', [$min_pay, $max_pay]);
-        }
-
-        $jobOfferPosts = $jobOfferPosts->get();
-        $jobRequestPosts = $jobRequestPosts->get();
-
-        return view('homeFiltered', compact('jobOfferPosts', 'jobRequestPosts'));
+        return view('home', compact('jobPosts'));
     }
 }

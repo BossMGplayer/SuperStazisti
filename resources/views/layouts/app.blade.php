@@ -31,7 +31,7 @@
                 </a>
 
                 <form action="{{ route('search') }}" method="GET">
-                    <input type="text" name="query" placeholder="Search...">
+                    <input type="text" name="query" placeholder="Search by job title...">
                     <button type="submit">Search</button>
                 </form>
 
@@ -132,6 +132,6 @@
             });
         });
     </script>
-
+    @yield('scripts')
 </body>
 </html>
